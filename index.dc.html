@@ -7,345 +7,589 @@
 </head>
 <body>
 <x-dc>
-<helmet data-dc-atomics>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Barlow+Condensed:wght@500;600;700&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fcfbfa;--surface:#fff;--ink:#17161a;--muted:#57555c;--line:rgba(23,22,26,.14);--red:#c22128;--red-soft:rgba(194,33,40,.08);--inv-bg:#17161a;--inv-ink:#f2f0ed;--inv-muted:#b3b0b6}
-@media (prefers-color-scheme:dark){:root{--bg:#131215;--surface:#1c1b1f;--ink:#f2f0ed;--muted:#a5a2a8;--line:rgba(242,240,237,.16);--red:#e0454b;--red-soft:rgba(224,69,75,.12);--inv-bg:#0d0c0f;--inv-ink:#f2f0ed;--inv-muted:#a5a2a8}}
-html[data-theme="light"]{--bg:#fcfbfa;--surface:#fff;--ink:#17161a;--muted:#57555c;--line:rgba(23,22,26,.14);--red:#c22128;--red-soft:rgba(194,33,40,.08);--inv-bg:#17161a;--inv-ink:#f2f0ed;--inv-muted:#b3b0b6}
-html[data-theme="dark"]{--bg:#131215;--surface:#1c1b1f;--ink:#f2f0ed;--muted:#a5a2a8;--line:rgba(242,240,237,.16);--red:#e0454b;--red-soft:rgba(224,69,75,.12);--inv-bg:#0d0c0f;--inv-ink:#f2f0ed;--inv-muted:#a5a2a8}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--red);text-decoration:none}a:hover{color:var(--ink)}
-details summary{cursor:pointer;list-style:none}details summary::-webkit-details-marker{display:none}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-#sticker-sheet{display:none}
-@media print{.site{display:none!important}#sticker-sheet{display:grid!important}}
-@page{margin:12mm}
-</style></helmet>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#111;font-family:'Barlow',system-ui,sans-serif;color:#111}
+  a{color:#E10600;text-decoration:none}
+  a:hover{color:#b30500}
+  ::selection{background:#E10600;color:#fff}
+  @keyframes tjpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  @keyframes tjdash{from{stroke-dashoffset:120}to{stroke-dashoffset:0}}
+  .tj-scroll::-webkit-scrollbar{height:0;width:0}
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0a0a0a">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a0a0a"/>
+    <rect x="470" y="250" width="140" height="140" rx="26" fill="#E10600" transform="rotate(-4 540 320)"/>
+    <text x="600" y="360" font-family="Arial Black, sans-serif" font-size="86" font-weight="900" fill="#ffffff" text-anchor="middle">TJ</text>
+    <text x="600" y="500" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">TAMO</text>
+    <text x="600" y="580" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#E10600" text-anchor="middle" letter-spacing="2">JUNTO</text>
+  </svg>
+</template>
+<div style="min-height:100vh;background:#111;display:flex;justify-content:center;align-items:flex-start">
+<div style="width:100%;max-width:480px;min-height:100vh;background:#fafafa;box-shadow:0 0 60px rgba(0,0,0,.5);display:flex;flex-direction:column;position:relative">
 
-<div id="sticker-sheet" style="grid-template-columns:1fr 1fr;gap:10mm;background:#fff;padding:6mm">
-  <sc-for list="{{ stickerCopies }}" as="s" hint-placeholder-count="4">
-    <div style="border:2.5px dashed #c9c6c2;border-radius:14px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:12px;background:#fff;color:#17161a;break-inside:avoid">
-      <div style="display:flex;align-items:center;gap:9px"><span style="width:20px;height:20px;background:#c22128;border-radius:50%;display:inline-block"></span><span style="font:700 20px 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Tamo Junto<span style="color:#c22128">.</span></span></div>
-      <img class="qr-print" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="QR Code" style="width:150px;height:150px">
-      <p style="margin:0;font:500 11.5px/1.45 'IBM Plex Sans',sans-serif;text-align:center;max-width:200px">Aponte a câmera e conheça o que a ciência revela sobre identidade social entre trabalhadores de aplicativos.</p>
-      <span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#8a878d;letter-spacing:.08em;text-transform:uppercase">Divulgação científica · Revisão integrativa</span>
+  <header style="position:sticky;top:0;z-index:50;background:#0a0a0a;color:#fff;padding:0">
+    <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;padding:14px 18px 12px;cursor:pointer">
+      <div style="width:34px;height:34px;background:#E10600;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:none;transform:rotate(-4deg)">
+        <span style="font-family:'Anton',sans-serif;font-size:20px;line-height:1;color:#fff">TJ</span>
+      </div>
+      <div style="line-height:1">
+        <div style="font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px">TAMO JUNTO</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:2px;color:#E10600;text-transform:uppercase">Motoristas &amp; Entregadores</div>
+      </div>
     </div>
-  </sc-for>
-</div>
-
-<div class="site" style="min-height:100vh">
-<header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:2px solid var(--ink)">
-  <div style="max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:13px 20px">
-    <a href="#topo" style="display:flex;align-items:center;gap:10px;color:var(--ink)"><span style="width:22px;height:22px;background:var(--red);border-radius:50%;display:inline-block;flex:none"></span><span style="font:700 16px 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Tamo Junto<span style="color:var(--red)">.</span></span></a>
-    <button onClick="{{ toggleMenu }}" aria-label="Menu" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:4.5px;padding:8px;min-width:44px;min-height:44px;justify-content:center;align-items:flex-end">
-      <span style="width:22px;height:2px;background:var(--ink);border-radius:2px"></span><span style="width:22px;height:2px;background:var(--ink);border-radius:2px"></span><span style="width:15px;height:2px;background:var(--red);border-radius:2px"></span>
-    </button>
-  </div>
-  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-    <nav style="border-top:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;padding:8px 0 14px;animation:fadeUp .18s ease">
-      <a href="#teoria" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O que é identidade social?</a>
-      <a href="#mapa" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Mapa conceitual</a>
-      <a href="#achados" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O que os estudos encontraram</a>
-      <a href="#fluxo" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Como o pertencimento é construído</a>
-      <a href="#redes" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O papel das redes</a>
-      <a href="#fatores" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Fortalece × dificulta</a>
-      <a href="#quiz" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Quiz</a>
-      <a href="#lacunas" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O que falta pesquisar</a>
-      <button onClick="{{ openSticker }}" style="margin:10px 24px 0;background:var(--red);color:#fff;border:none;border-radius:2px;padding:13px;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer">Imprimir adesivo com QR Code</button>
+    <nav class="tj-scroll" style="display:flex;gap:2px;padding:0 10px;overflow-x:auto;border-top:1px solid #222">
+      <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="4">
+        <button onClick="{{ tab.go }}" style="{{ tab.style }}">{{ tab.label }}</button>
+      </sc-for>
     </nav>
-  </sc-if>
-</header>
+  </header>
 
-<main id="topo" style="max-width:760px;margin:0 auto">
-  <section data-screen-label="Hero" style="padding:52px 24px 44px;display:flex;flex-direction:column;gap:16px">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Divulgação científica · Psicologia Social</span>
-    <h1 style="margin:0;font:700 clamp(48px,13vw,72px)/0.98 'IBM Plex Sans',sans-serif;letter-spacing:-.03em">Tamo<br>Junto<span style="color:var(--red)">.</span></h1>
-    <p style="margin:0;font:400 17px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted);max-width:42ch;text-wrap:pretty">O que a ciência revela sobre identidade social entre trabalhadores de aplicativos.</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
-      <a href="#porque" style="background:var(--ink);color:var(--bg);font:600 14px 'IBM Plex Sans',sans-serif;padding:14px 30px;border-radius:2px">Explorar →</a>
-      <button onClick="{{ openSticker }}" style="background:none;border:1.5px solid var(--ink);color:var(--ink);font:600 14px 'IBM Plex Sans',sans-serif;padding:13px 22px;border-radius:2px;cursor:pointer">Adesivo QR</button>
-    </div>
-    <span style="font:500 9.5px 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:5px 9px;align-self:flex-start">Produto técnico derivado de revisão integrativa</span>
-  </section>
+  <main style="flex:1;background:#fafafa">
 
-  <section style="display:grid;grid-template-columns:1fr 1fr" data-screen-label="Blocos-índice">
-    <a href="#fluxo" style="background:var(--red);color:#fff;padding:22px 20px;display:flex;flex-direction:column;gap:6px;min-height:96px"><span style="font:600 10px 'IBM Plex Mono',monospace;opacity:.75">01</span><b style="font:600 14.5px/1.3">Como surge o pertencimento?</b></a>
-    <a href="#achados" style="background:var(--inv-bg);color:var(--inv-ink);padding:22px 20px;display:flex;flex-direction:column;gap:6px"><span style="font:600 10px 'IBM Plex Mono',monospace;opacity:.75">02</span><b style="font:600 14.5px/1.3">O que os estudos encontraram?</b></a>
-    <a href="#fatores" style="background:var(--surface);color:var(--ink);padding:22px 20px;display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--ink)"><span style="font:600 10px 'IBM Plex Mono',monospace;color:var(--muted)">03</span><b style="font:600 14.5px/1.3">O que fortalece o coletivo?</b></a>
-    <a href="#lacunas" style="background:var(--surface);color:var(--ink);padding:22px 20px;display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--red)"><span style="font:600 10px 'IBM Plex Mono',monospace;color:var(--red)">04</span><b style="font:600 14.5px/1.3">O que ainda falta pesquisar?</b></a>
-  </section>
-
-  <section id="porque" data-screen-label="Por que existe" style="padding:44px 24px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Por que este material existe?</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Da revisão à divulgação</h2>
-    <p style="margin:0;font:400 15px/1.65 'IBM Plex Sans',sans-serif;color:var(--muted);text-wrap:pretty">Este site transforma os resultados de uma <b style="color:var(--ink)">revisão integrativa da literatura</b> em uma experiência de divulgação científica. Cada seção sintetiza o que os estudos identificaram sobre identidade social, pertencimento e formação de coletivos entre trabalhadores de aplicativos — com linguagem descritiva e baseada em evidências.</p>
-  </section>
-
-  <section id="teoria" data-screen-label="Teoria" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">A teoria · Henri Tajfel</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">O que é identidade social?</h2>
-    <p style="margin:0;font:400 15px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">A Teoria da Identidade Social explica como o "nós" se torna parte do "eu". Toque em cada processo:</p>
-    <details style="background:var(--surface);border:2px solid var(--ink);border-radius:2px">
-      <summary style="padding:16px 18px;display:flex;align-items:center;gap:12px"><span style="width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;flex:none">1</span><b style="font:600 15px 'IBM Plex Sans',sans-serif">Categorização social</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary>
-      <p style="margin:0;padding:0 18px 16px 64px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Organizamos o mundo social em categorias: "entregadores", "motoristas", "passageiros", "a plataforma". Categorizar simplifica — e define fronteiras entre grupos.</p>
-    </details>
-    <details style="background:var(--surface);border:2px solid var(--ink);border-radius:2px">
-      <summary style="padding:16px 18px;display:flex;align-items:center;gap:12px"><span style="width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;flex:none">2</span><b style="font:600 15px 'IBM Plex Sans',sans-serif">Identificação</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary>
-      <p style="margin:0;padding:0 18px 16px 64px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Passamos a nos ver como parte de um grupo — e ele passa a fazer parte de quem somos. Surge o sentimento de pertencimento e a autoestima coletiva.</p>
-    </details>
-    <details style="background:var(--surface);border:2px solid var(--ink);border-radius:2px">
-      <summary style="padding:16px 18px;display:flex;align-items:center;gap:12px"><span style="width:34px;height:34px;border-radius:50%;background:var(--surface);border:2px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;flex:none">3</span><b style="font:600 15px 'IBM Plex Sans',sans-serif">Comparação entre grupos</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary>
-      <p style="margin:0;padding:0 18px 16px 64px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Comparamos o nosso grupo a outros. Uma avaliação positiva do próprio grupo fortalece a autoestima coletiva e as normas compartilhadas.</p>
-    </details>
-  </section>
-
-  <section id="mapa" data-screen-label="Mapa conceitual" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Mapa conceitual interativo</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Os conceitos, conectados</h2>
-    <p style="margin:0;font:400 14px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Toque em um conceito para ver a explicação.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="6">
-        <button onClick="{{ n.pick }}" style="{{ n.style }}">{{ n.label }}</button>
-      </sc-for>
-    </div>
-    <div style="background:var(--surface);border-left:4px solid var(--red);padding:16px 18px;border-radius:0 2px 2px 0;min-height:64px">
-      <b style="font:600 14px 'IBM Plex Sans',sans-serif">{{ nodeTitle }}</b>
-      <p style="margin:6px 0 0;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">{{ nodeText }}</p>
-    </div>
-  </section>
-
-  <section id="achados" data-screen-label="Achados" style="padding:44px 24px;background:var(--inv-bg);color:var(--inv-ink);display:flex;flex-direction:column;gap:14px">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Achados da revisão</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">O que a literatura aponta</h2>
-    <div style="border-left:3px solid var(--red);padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">Os estudos identificam que a narrativa do <b style="color:var(--inv-ink)">"empreendedor de si"</b> pode afastar o trabalhador do reconhecimento como categoria — um "autogerenciamento subordinado". <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[1,3]</a></p></div>
-    <div style="border-left:3px solid #fff;padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">Sem espaços formais de convivência, os autores encontraram trabalhadores <b style="color:var(--inv-ink)">coconstruindo identidade em grupos informais</b> — unidos por pessoas, propósitos e rotinas. <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[4]</a></p></div>
-    <div style="border-left:3px solid var(--red);padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">As pesquisas sugerem que o pertencimento ocorre em dois níveis: <b style="color:var(--inv-ink)">grupal</b> (a "tribo", com símbolos próprios) e <b style="color:var(--inv-ink)">individual</b> (sentir-se visto e reconhecido). <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[4]</a></p></div>
-    <div style="border-left:3px solid #fff;padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">Em um dos estudos, <b style="color:var(--inv-ink)">93% dos motoristas participavam de grupos de WhatsApp</b> — espaços de apoio e aprendizado mútuo. <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[3]</a></p></div>
-  </section>
-
-  <section id="fluxo" data-screen-label="Fluxo do pertencimento" style="padding:44px 24px;display:flex;flex-direction:column;gap:18px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Fluxo observado na literatura</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Como o pertencimento é construído</h2>
-    <div style="display:flex;flex-direction:column;gap:0;border-left:2px solid var(--line);padding-left:20px;position:relative">
-      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--red)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Experiências semelhantes</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Mesmas rotas, mesmas esperas, mesmos desafios cotidianos.</p></div>
-      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--red)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Reconhecimento mútuo</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">"Ele passa pelo que eu passo" — o outro deixa de ser concorrente.</p></div>
-      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--ink)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Identificação</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">O "eu" começa a incluir o "nós": surge a identidade compartilhada.</p></div>
-      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--ink)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Sentimento de grupo</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Normas, símbolos e apoio mútuo consolidam o coletivo.</p></div>
-      <div style="padding:0;position:relative"><span style="position:absolute;left:-29px;top:0;width:16px;height:16px;border-radius:50%;background:var(--red);border:3px solid var(--bg)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif;color:var(--red)">Ações coletivas</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Descritas pela literatura como desdobramento observado desse processo.</p></div>
-    </div>
-  </section>
-
-  <section id="redes" data-screen-label="O papel das redes" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">O papel das redes</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Onde o coletivo acontece</h2>
-    <p style="margin:0;font:400 14px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">As pesquisas descrevem espaços — digitais e físicos — onde a identidade coletiva se forma:</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--red);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Grupos de mensagem</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">WhatsApp e Telegram: dicas, alertas de segurança e apoio mútuo.</p></div>
-      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Pontos de espera</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Praças e portas de restaurantes como locais de encontro e conversa.</p></div>
-      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Redes sociais</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Páginas e canais onde circulam informações, memes e relatos.</p></div>
-      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--red);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Associações</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Instâncias autônomas descritas nos estudos, mediadas pela comunicação digital.</p></div>
-    </div>
-  </section>
-
-  <section id="fatores" data-screen-label="Fortalece × dificulta" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Fortalece × dificulta</h2>
-    <div style="display:flex;gap:8px">
-      <button onClick="{{ showPos }}" style="{{ posTabStyle }}">Fortalece +</button>
-      <button onClick="{{ showNeg }}" style="{{ negTabStyle }}">Dificulta −</button>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <sc-for list="{{ factors }}" as="f" hint-placeholder-count="5">
-        <div style="display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:2px;padding:13px 16px;border-left:4px solid {{ f.color }};animation:fadeUp .25s ease both"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:600 13.5px 'IBM Plex Sans',sans-serif">{{ f.label }}</span><span style="font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:var(--muted)">{{ f.desc }}</span></div><span style="margin-left:auto;font:600 12px 'IBM Plex Mono',monospace;color:{{ f.color }}">{{ f.sign }}</span></div>
-      </sc-for>
-    </div>
-  </section>
-
-  <section id="quiz" data-screen-label="Quiz" style="padding:44px 24px;background:var(--inv-bg);color:var(--inv-ink);display:flex;flex-direction:column;gap:14px">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Teste o que aprendeu</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Quiz: identidade social</h2>
-    <sc-if value="{{ quizDone }}" hint-placeholder-val="{{ false }}">
-      <div style="background:rgba(255,255,255,.06);border-radius:4px;padding:28px 22px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;animation:fadeUp .3s ease">
-        <span style="font:700 44px 'IBM Plex Mono',monospace;color:var(--red)">{{ scoreText }}</span>
-        <p style="margin:0;font:400 14px/1.6 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">{{ scoreMsg }}</p>
-        <button onClick="{{ restartQuiz }}" style="background:var(--red);color:#fff;border:none;border-radius:2px;padding:13px 28px;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer">Refazer quiz</button>
+    <!-- ===================== INÍCIO ===================== -->
+    <sc-if value="{{ isInicio }}" hint-placeholder-val="{{ true }}">
+    <section>
+      <div style="background:#0a0a0a;color:#fff;padding:40px 22px 46px;position:relative;overflow:hidden">
+        <div style="position:absolute;right:-40px;top:-30px;width:180px;height:180px;background:#E10600;opacity:.12;border-radius:50%"></div>
+        <div style="position:relative">
+          <div style="display:inline-block;background:#E10600;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;padding:5px 11px;border-radius:4px;text-transform:uppercase">Feito pra quem roda na rua</div>
+          <h1 style="font-family:'Anton',sans-serif;font-size:44px;line-height:.95;margin:18px 0 12px;letter-spacing:.5px">A GENTE<br><span style="color:#E10600">TÁ JUNTO.</span></h1>
+          <p style="font-size:16px;line-height:1.5;color:#d0d0d0;margin:0;max-width:340px">Um ponto de encontro para motoristas e entregadores de aplicativo. Direitos, história e recursos — de graça, na palma da mão.</p>
+        </div>
       </div>
-    </sc-if>
-    <sc-if value="{{ quizActive }}" hint-placeholder-val="{{ true }}">
-      <div style="background:rgba(255,255,255,.06);border-radius:4px;padding:22px;display:flex;flex-direction:column;gap:12px">
-        <span style="font:500 11px 'IBM Plex Mono',monospace;color:var(--inv-muted)">{{ qProgress }}</span>
-        <b style="font:600 16px/1.4 'IBM Plex Sans',sans-serif">{{ qText }}</b>
-        <sc-for list="{{ qOptions }}" as="o" hint-placeholder-count="3">
-          <button onClick="{{ o.pick }}" style="{{ o.style }}">{{ o.label }}</button>
-        </sc-for>
-        <sc-if value="{{ qAnswered }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;flex-direction:column;gap:10px;animation:fadeUp .25s ease">
-            <p style="margin:0;font:400 13px/1.6 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">{{ qFeedback }}</p>
-            <button onClick="{{ nextQ }}" style="align-self:flex-start;background:#fff;color:#17161a;border:none;border-radius:2px;padding:12px 26px;font:600 13.5px 'IBM Plex Sans',sans-serif;cursor:pointer">{{ nextLabel }}</button>
+
+      <div style="padding:28px 22px 8px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:#888;text-transform:uppercase">O projeto</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:24px;line-height:1;margin:6px 0 6px;color:#111">POR QUE ESTE SITE EXISTE</h2>
+        <div style="width:48px;height:4px;background:#E10600;border-radius:2px;margin-bottom:14px"></div>
+        <p style="font-size:15.5px;line-height:1.6;color:#333;margin:0">Este site é um produto técnico desenvolvido a partir de uma revisão integrativa da literatura científica sobre o trabalho por aplicativos. Seu objetivo é traduzir os principais achados das pesquisas em uma linguagem acessível, reunindo informações sobre como motoristas e entregadores constroem sua identidade enquanto categoria de trabalho, quais fatores favorecem ou dificultam a formação de redes de apoio e organização coletiva, e onde essas conexões acontecem. O conteúdo também inclui uma linha do tempo das principais conquistas da categoria e uma seção de recursos com indicações de organizações em diferentes estados que podem ser procuradas pelos trabalhadores.</p>
+      </div>
+
+      <div style="background:#0a0a0a;color:#fff;padding:30px 22px 26px;margin-top:28px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:#E10600;text-transform:uppercase">Achados da revisão</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:24px;line-height:1;margin:6px 0 6px;color:#fff">O QUE A LITERATURA APONTA</h2>
+        <div style="width:48px;height:4px;background:#E10600;border-radius:2px;margin-bottom:18px"></div>
+        <sc-for list="{{ findings }}" as="f" hint-placeholder-count="4">
+          <div style="display:flex;gap:14px;margin-bottom:18px">
+            <div style="flex:none;width:4px;border-radius:2px;background:#E10600"></div>
+            <div style="flex:1">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16.5px;line-height:1.2;color:#fff">{{ f.title }}</div>
+              <p style="font-size:14px;line-height:1.55;color:#c9c9c9;margin:5px 0 0">{{ f.body }}</p>
+            </div>
           </div>
-        </sc-if>
+        </sc-for>
       </div>
+
+      <div style="padding:28px 22px 0">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:#888;text-transform:uppercase">Linha do tempo</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:24px;line-height:1;margin:6px 0 6px;color:#111">CONQUISTAS DA CATEGORIA</h2>
+        <div style="width:48px;height:4px;background:#E10600;border-radius:2px;margin-bottom:14px"></div>
+        <p style="font-size:15.5px;line-height:1.6;color:#333;margin:0">Do primeiro breque ao reconhecimento na lei — a luta no mundo e no <span style="color:#E10600;font-weight:600">Brasil</span>.</p>
+      </div>
+      <div style="padding:24px 8px 8px;display:flex;align-items:center;gap:4px">
+        <button onClick="{{ tlPrev }}" disabled="{{ tlPrevDisabled }}" style="{{ tlPrevStyle }}">‹</button>
+        <div ref="{{ tlScrollRef }}" onScroll="{{ tlOnScroll }}" class="tj-scroll" style="flex:1;overflow-x:auto;position:relative;scroll-snap-type:x mandatory">
+          <div style="position:absolute;left:0;top:34px;height:3px;width:1800%;background:linear-gradient(90deg,#E10600,#0a0a0a)"></div>
+          <div style="{{ tlTrackStyle }}">
+            <sc-for list="{{ timeline }}" as="ev" hint-placeholder-count="3">
+              <div style="flex:none;width:40%;padding:0 5px;display:flex;flex-direction:column;scroll-snap-align:start">
+                <div style="{{ ev.yearStyle }}">{{ ev.year }}</div>
+                <div style="height:26px;display:flex;align-items:center;justify-content:center;position:relative;z-index:2">
+                  <div style="{{ ev.dotStyle }}"></div>
+                </div>
+                <div style="{{ ev.cardStyle }}">
+                  <sc-if value="{{ ev.brazil }}">
+                    <div style="display:inline-block;background:#E10600;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:3px;text-transform:uppercase;margin-bottom:6px">🇧🇷 Brasil</div>
+                  </sc-if>
+                  <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;line-height:1.1;text-transform:uppercase;letter-spacing:.3px;color:#111">{{ ev.title }}</div>
+                  <p style="font-size:12px;line-height:1.45;color:#555;margin:5px 0 0">{{ ev.desc }}</p>
+                  <sc-if value="{{ ev.hasLink }}">
+                    <a href="{{ ev.link }}" target="_blank" style="display:inline-block;margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase">Ler reportagem →</a>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <button onClick="{{ tlNext }}" disabled="{{ tlNextDisabled }}" style="{{ tlNextStyle }}">›</button>
+      </div>
+      <div style="padding:0 22px 4px;text-align:center">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:1px;color:#999;text-transform:uppercase">Página {{ tlPage }} de {{ tlPages }}</div>
+      </div>
+
+      <div style="background:#0a0a0a;color:#fff;padding:30px 22px 30px;margin-top:20px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:#E10600;text-transform:uppercase">O papel das redes</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:24px;line-height:1;margin:6px 0 6px;color:#fff">ONDE O COLETIVO ACONTECE</h2>
+        <div style="width:48px;height:4px;background:#E10600;border-radius:2px;margin-bottom:14px"></div>
+        <p style="font-size:14.5px;line-height:1.55;color:#c9c9c9;margin:0 0 18px">As pesquisas descrevem espaços — digitais e físicos — onde a identidade coletiva se forma:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <sc-for list="{{ spaces }}" as="s" hint-placeholder-count="4">
+            <div style="{{ s.cardStyle }}">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16.5px;line-height:1.2;color:#fff">{{ s.title }}</div>
+              <p style="font-size:13.5px;line-height:1.5;color:#b5b5b5;margin:6px 0 0">{{ s.body }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding:30px 22px 34px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;color:#888;text-transform:uppercase">Na prática</div>
+        <h2 style="font-family:'Anton',sans-serif;font-size:24px;line-height:1;margin:6px 0 6px;color:#111">FORTALECE × DIFICULTA</h2>
+        <div style="width:48px;height:4px;background:#E10600;border-radius:2px;margin-bottom:16px"></div>
+        <div style="display:flex;gap:10px;margin-bottom:18px">
+          <button onClick="{{ fdShowPlus }}" style="{{ fdPlusBtnStyle }}">Fortalece +</button>
+          <button onClick="{{ fdShowMinus }}" style="{{ fdMinusBtnStyle }}">Dificulta −</button>
+        </div>
+        <sc-for list="{{ fdItems }}" as="it" hint-placeholder-count="5">
+          <div style="{{ fdCardStyle }}">
+            <div style="flex:1">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16.5px;line-height:1.2;color:#111">{{ it.title }}</div>
+              <p style="font-size:13.5px;line-height:1.5;color:#555;margin:5px 0 0">{{ it.body }}</p>
+            </div>
+            <span style="{{ fdSignStyle }}">{{ fdSign }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin:0 22px 30px;background:#E10600;border-radius:12px;padding:20px 20px;color:#fff">
+        <div style="font-family:'Anton',sans-serif;font-size:22px;line-height:1">VIU ISSO NUM ADESIVO?</div>
+        <p style="font-size:14.5px;line-height:1.5;margin:8px 0 14px;color:#ffe3e0">Cole no seu baú, no capacete ou no carro e ajude a rede a crescer. Imprima o seu.</p>
+        <button onClick="{{ goAdesivo }}" style="background:#fff;color:#E10600;border:none;border-radius:8px;padding:12px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">Imprimir meu adesivo →</button>
+      </div>
+    </section>
     </sc-if>
-  </section>
 
-  <section id="lacunas" data-screen-label="Lacunas" style="padding:44px 24px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Agenda de pesquisa</span>
-    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">O que ainda falta pesquisar?</h2>
-    <details style="border-bottom:1px solid var(--line)"><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Estudos longitudinais</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Como a identidade coletiva evolui ao longo do tempo, diante da alta rotatividade da categoria.</p></details>
-    <details style="border-bottom:1px solid var(--line)"><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Recortes de gênero e raça</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Grupos formados por mulheres aparecem nos estudos, mas ainda há pouca análise específica desses recortes.</p></details>
-    <details style="border-bottom:1px solid var(--line)"><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">O papel do algoritmo na identidade</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Como o gerenciamento algorítmico modula, ao mesmo tempo, isolamento e novas formas de conexão.</p></details>
-    <details><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Comparações entre cidades e países</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Contextos regulatórios diferentes podem produzir processos identitários distintos.</p></details>
-  </section>
-
-  <section data-screen-label="Conclusão" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
-    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Conclusão</span>
-    <p style="margin:0;font:500 19px/1.55 'IBM Plex Sans',sans-serif;letter-spacing:-.01em;text-wrap:pretty">"A revisão mostra que a identidade social entre trabalhadores de aplicativos é construída por diferentes processos de interação, pertencimento e reconhecimento coletivo. Compreender esses mecanismos contribui para ampliar o conhecimento científico sobre novas formas de organização do trabalho."</p>
-    <button onClick="{{ openSticker }}" style="align-self:flex-start;background:var(--red);color:#fff;border:none;border-radius:2px;padding:14px 28px;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer">Imprimir adesivo de divulgação</button>
-  </section>
-
-  <section id="refs" data-screen-label="Referências" style="padding:44px 24px 36px;display:flex;flex-direction:column;gap:10px">
-    <h2 style="margin:0;font:700 20px/1.2 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Estudos sintetizados</h2>
-    <p style="margin:0 0 4px;font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:var(--muted)">Artigos incluídos na revisão integrativa (autoria e ano conforme publicação original):</p>
-    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[1]</b> Os entregadores de aplicativos e a fragmentação da classe trabalhadora na contemporaneidade.</p>
-    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[2]</b> Enquadramentos em disputa sob um aparente consenso neoliberal: o caso da regulamentação do trabalho de entregas por aplicativo no Brasil (2025).</p>
-    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[3]</b> "Parceiros" assimétricos: trabalho e saúde de motoristas por aplicativos no Rio de Janeiro, Brasil (2021).</p>
-    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[4]</b> Laços que criam nós: como trabalhadores de aplicativos coconstroem suas identidades em contextos precários de trabalho.</p>
-  </section>
-</main>
-
-<footer style="background:var(--inv-bg);color:var(--inv-muted);padding:28px 24px;display:flex;flex-direction:column;gap:8px">
-  <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;background:var(--red);border-radius:50%"></span><span style="font:700 14px 'IBM Plex Sans',sans-serif;color:var(--inv-ink)">Tamo Junto<span style="color:var(--red)">.</span></span></div>
-  <span style="font:400 11.5px/1.6 'IBM Plex Sans',sans-serif">Produto técnico de divulgação científica derivado de revisão integrativa da literatura · 2026</span>
-</footer>
-
-<sc-if value="{{ stickerOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;inset:0;z-index:100;background:rgba(13,12,15,.7);display:flex;align-items:flex-end;justify-content:center" onClick="{{ closeSticker }}">
-    <div style="background:var(--bg);border-radius:14px 14px 0 0;padding:24px 24px 32px;width:100%;max-width:480px;display:flex;flex-direction:column;gap:16px;animation:fadeUp .25s ease" onClick="{{ stopProp }}">
-      <div style="display:flex;align-items:center;justify-content:space-between"><b style="font:700 17px 'IBM Plex Sans',sans-serif">Adesivo de divulgação</b><button onClick="{{ closeSticker }}" aria-label="Fechar" style="background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;min-width:44px;min-height:44px">×</button></div>
-      <div style="align-self:center;border:2.5px dashed var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;background:#fff;color:#17161a;max-width:240px">
-        <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#c22128;border-radius:50%"></span><span style="font:700 16px 'IBM Plex Sans',sans-serif">Tamo Junto<span style="color:#c22128">.</span></span></div>
-        <sc-if value="{{ qrReady }}" hint-placeholder-val="{{ false }}"><img class="qr-print" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="QR Code" style="width:130px;height:130px"></sc-if>
-        <sc-if value="{{ qrLoading }}" hint-placeholder-val="{{ true }}"><div style="width:130px;height:130px;background:repeating-linear-gradient(45deg,#f0eeeb,#f0eeeb 8px,#e6e3df 8px,#e6e3df 16px);display:flex;align-items:center;justify-content:center;font:500 10px 'IBM Plex Mono',monospace;color:#8a878d">gerando QR…</div></sc-if>
-        <p style="margin:0;font:500 10px/1.45 'IBM Plex Sans',sans-serif;text-align:center">Aponte a câmera e conheça o que a ciência revela sobre identidade social entre trabalhadores de aplicativos.</p>
+    <!-- ===================== RECURSOS (seleção) ===================== -->
+    <sc-if value="{{ isRecursos }}" hint-placeholder-val="{{ true }}">
+    <section>
+      <div style="background:#0a0a0a;color:#fff;padding:34px 22px 30px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:2px;color:#E10600;text-transform:uppercase">Apoio perto de você</div>
+        <h1 style="font-family:'Anton',sans-serif;font-size:32px;line-height:1;margin:6px 0 20px">ONDE VOCÊ<br>TRABALHA?</h1>
+        <label style="display:block;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:1px;color:#bbb;text-transform:uppercase;margin-bottom:8px">Selecione o estado</label>
+        <div style="position:relative">
+          <select onChange="{{ onSelectUF }}" value="{{ selectedUF }}" style="width:100%;appearance:none;background:#fff;color:#111;border:none;border-radius:10px;padding:16px 44px 16px 16px;font-family:'Barlow',sans-serif;font-weight:600;font-size:17px;cursor:pointer">
+            <option value="">— Escolha seu estado —</option>
+            <sc-for list="{{ ufOptions }}" as="uf">
+              <option value="{{ uf.code }}">{{ uf.label }}</option>
+            </sc-for>
+          </select>
+          <span style="position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:'Anton',sans-serif;color:#E10600;font-size:16px;pointer-events:none">▼</span>
+        </div>
       </div>
-      <p style="margin:0;font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:var(--muted);text-align:center">A impressão gera uma folha com 4 adesivos recortáveis apontando para este site.</p>
-      <button onClick="{{ printSticker }}" style="background:var(--red);color:#fff;border:none;border-radius:2px;padding:15px;font:600 15px 'IBM Plex Sans',sans-serif;cursor:pointer">Imprimir folha de adesivos</button>
+      <div style="padding:26px 22px">
+        <p style="font-size:15px;line-height:1.6;color:#444;margin:0 0 20px">Escolha seu estado acima para ver <b>sindicatos, associações, grupos e canais oficiais</b> que atuam na sua região.</p>
+        <div style="background:#fff;border:1px solid #ececec;border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.05)">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E10600;margin-bottom:12px">Atalhos por região</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ quickUFs }}" as="q">
+              <button onClick="{{ q.go }}" style="background:#f2f2f2;border:1px solid #e2e2e2;border-radius:20px;padding:7px 14px;font-family:'Barlow',sans-serif;font-weight:600;font-size:13.5px;color:#333;cursor:pointer">{{ q.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ===================== RECURSOS (estado) ===================== -->
+    <sc-if value="{{ isRecursosUF }}" hint-placeholder-val="{{ true }}">
+    <section>
+      <div style="background:#0a0a0a;color:#fff;padding:22px 22px 26px">
+        <button onClick="{{ goRecursos }}" style="background:none;border:none;color:#E10600;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:0;margin-bottom:14px">← Trocar estado</button>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:56px;height:56px;background:#E10600;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none">
+            <span style="font-family:'Anton',sans-serif;font-size:24px;color:#fff">{{ ufCode }}</span>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:1px;color:#E10600;text-transform:uppercase">Recursos em</div>
+            <h1 style="font-family:'Anton',sans-serif;font-size:26px;line-height:1;margin:2px 0 0">{{ ufName }}</h1>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:22px 20px 6px">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-size:13px;color:#E10600;margin:0 0 4px">No seu estado</h3>
+        <div style="width:40px;height:3px;background:#E10600;border-radius:2px;margin-bottom:14px"></div>
+        <sc-for list="{{ stateResources }}" as="r" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #ececec;border-radius:11px;padding:15px 16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)">
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <span style="{{ r.tagStyle }}">{{ r.tag }}</span>
+            </div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;line-height:1.15;text-transform:uppercase;color:#111;margin-top:8px">{{ r.name }}</div>
+            <p style="font-size:13.5px;line-height:1.5;color:#555;margin:5px 0 0">{{ r.desc }}</p>
+            <sc-if value="{{ r.hasLink }}">
+              <a href="{{ r.link }}" target="_blank" style="display:inline-block;margin-top:9px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:1px;text-transform:uppercase">{{ r.linkLabel }} →</a>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="padding:14px 20px 34px"></div>
+    </section>
+    </sc-if>
+
+    <!-- ===================== IMPRIMA SEU ADESIVO ===================== -->
+    <sc-if value="{{ isAdesivo }}" hint-placeholder-val="{{ true }}">
+    <section>
+      <div style="background:#0a0a0a;color:#fff;padding:34px 22px 24px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:2px;color:#E10600;text-transform:uppercase">Espalhe a rede</div>
+        <h1 style="font-family:'Anton',sans-serif;font-size:32px;line-height:1;margin:6px 0 8px">IMPRIMA<br>SEU ADESIVO</h1>
+        <p style="font-size:14.5px;color:#c9c9c9;margin:0;line-height:1.5">Escolha o modelo, imprima e cole no baú, capacete ou carro. O QR Code leva direto pra cá.</p>
+      </div>
+
+      <div style="padding:18px 22px 4px">
+        <div style="display:flex;gap:8px;background:#eee;border-radius:10px;padding:5px">
+          <sc-for list="{{ modelTabs }}" as="m">
+            <button onClick="{{ m.go }}" style="{{ m.style }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding:20px 22px 8px">
+        <div style="border:2px dashed #cfcfcf;border-radius:14px;padding:10px;background:#fff">
+          <div style="{{ stickerStyle }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:auto">
+              <div style="display:flex;align-items:center;gap:6px">
+                <div style="width:26px;height:26px;background:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;transform:rotate(-4deg)"><span style="font-family:'Anton',sans-serif;font-size:15px;color:#E10600">TJ</span></div>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;color:#fff;text-transform:uppercase">Tamo Junto</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <sc-if value="{{ showBox }}">
+                  <div style="width:30px;height:26px;border:3px solid #fff;border-radius:4px;position:relative;flex:none"><div style="position:absolute;top:7px;left:-3px;right:-3px;height:3px;background:#fff"></div></div>
+                </sc-if>
+                <sc-if value="{{ showWheel }}">
+                  <div style="width:30px;height:30px;border:3px solid #fff;border-radius:50%;position:relative;flex:none;display:flex;align-items:center;justify-content:center"><div style="width:7px;height:7px;background:#fff;border-radius:50%"></div><div style="position:absolute;top:1px;bottom:1px;left:50%;width:2px;background:#fff;transform:translateX(-50%)"></div><div style="position:absolute;left:1px;right:1px;top:50%;height:2px;background:#fff;transform:translateY(-50%)"></div></div>
+                </sc-if>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <span style="display:inline-block;background:rgba(0,0,0,.28);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;color:#fff;text-transform:uppercase;padding:3px 9px;border-radius:4px">{{ stickerRole }}</span>
+            </div>
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:8px">
+              <div style="flex:1">
+                <div style="font-family:'Anton',sans-serif;font-size:36px;line-height:.9;color:#fff;letter-spacing:.5px">TAMO<br>JUNTO</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;line-height:1.15;color:#ffd9d6;text-transform:uppercase;margin-top:7px;max-width:150px">{{ stickerTagline }}</div>
+              </div>
+              <div style="flex:none;background:#fff;padding:7px;border-radius:8px">
+                <div ref="{{ qrRef }}" style="width:78px;height:78px"></div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:8px;letter-spacing:1px;text-align:center;color:#999;text-transform:uppercase;margin-top:3px">tamojunto-me.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <button onClick="{{ doPrint }}" style="flex:1;background:#E10600;color:#fff;border:none;border-radius:10px;padding:15px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">🖨 Imprimir</button>
+          <button onClick="{{ doPrint }}" style="flex:none;background:#0a0a0a;color:#fff;border:none;border-radius:10px;padding:15px 18px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;text-transform:uppercase;cursor:pointer">Baixar</button>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ececec;border-radius:11px;padding:16px;margin:16px 0 34px">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E10600;margin-bottom:10px">Como usar</div>
+          <sc-for list="{{ printSteps }}" as="s">
+            <div style="display:flex;gap:10px;margin-bottom:9px;align-items:flex-start">
+              <span style="font-family:'Anton',sans-serif;color:#E10600;font-size:15px;line-height:1.3;flex:none">{{ s.n }}</span>
+              <span style="font-size:14px;line-height:1.4;color:#444">{{ s.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+  </main>
+
+  <footer style="background:#0a0a0a;color:#8a8a8a;padding:28px 22px 34px">
+    <div style="display:flex;align-items:center;gap:9px;margin-bottom:16px">
+      <div style="width:28px;height:28px;background:#E10600;border-radius:6px;display:flex;align-items:center;justify-content:center;transform:rotate(-4deg)"><span style="font-family:'Anton',sans-serif;font-size:15px;color:#fff">TJ</span></div>
+      <span style="font-family:'Anton',sans-serif;font-size:16px;color:#fff;letter-spacing:.5px">TAMO JUNTO</span>
     </div>
-  </div>
-</sc-if>
+    <p style="font-size:13px;line-height:1.6;margin:0 0 16px;max-width:340px">Iniciativa independente e sem fins lucrativos, feita por e para trabalhadores de aplicativo. Não temos vínculo com nenhuma plataforma ou empresa.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:18px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:18px">
+      <a href="mailto:contato@tamojunto-me.com" style="color:#ddd">contato@tamojunto-me.com</a>
+      <a href="#" style="color:#ddd">Instagram</a>
+      <a href="#" style="color:#ddd">Termos de uso</a>
+      <a href="#" style="color:#ddd">Privacidade</a>
+    </div>
+    <div style="border-top:1px solid #222;padding-top:14px;font-size:11.5px;color:#666;line-height:1.5">© {{ year }} Tamo Junto · tamojunto-me.com · As informações são de caráter orientativo. Verifique sempre os canais oficiais de cada entidade.</div>
+  </footer>
+
+</div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sistema&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;sistema&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Aparência&quot;},&quot;studyUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://tamojunto.com.br&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Divulgação&quot;}}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { menuOpen: false, stickerOpen: false, qrData: null, selNode: 1, showNeg: false,
-    qIndex: 0, qPicked: null, qScore: 0, quizDone: false };
+  state = { route: 'inicio', selectedUF: '', model: 'ambos', tlPage: 0, fd: 'plus' };
 
-  questions = [
-    { q: 'Para Tajfel, a identidade social nasce principalmente de…', opts: ['Traços individuais de personalidade', 'Pertencimento a grupos sociais', 'Nível de renda'], correct: 1, fb: 'Correto: parte de quem somos vem dos grupos aos quais sentimos pertencer.' },
-    { q: '"Categorização social" significa…', opts: ['Organizar o mundo social em grupos', 'Classificar pessoas por desempenho', 'Criar hierarquias nas empresas'], correct: 0, fb: 'Isso: categorizar simplifica o mundo social e define fronteiras entre grupos.' },
-    { q: 'Segundo os estudos, grupos de WhatsApp entre trabalhadores funcionam como…', opts: ['Apenas canais de reclamação', 'Espaços de troca, apoio e reconhecimento mútuo', 'Ferramentas criadas pelas plataformas'], correct: 1, fb: 'Exato: a literatura descreve esses grupos como redes de sociabilidade e aprendizado mútuo.' },
-    { q: 'O que a literatura aponta como fator que DIFICULTA a formação de coletivos?', opts: ['Objetivos comuns', 'Solidariedade entre pares', 'Individualização e gerenciamento algorítmico'], correct: 2, fb: 'Correto: isolamento, competição, rotatividade e algoritmos aparecem como dificultadores.' },
-    { q: '"Pertencimento despersonalizado", identificado em um dos estudos, refere-se a…', opts: ['Sentir-se parte da categoria mesmo sem um grupo específico', 'Perder a identidade individual', 'Não pertencer a grupo algum'], correct: 0, fb: 'Isso: um senso de pertencimento focado no indivíduo, independente de um grupo formado.' }
-  ];
+  go(route){ this.setState({ route }); try{ window.scrollTo(0,0) }catch(e){} }
+  openUF(code){ this.setState({ route:'recursos-uf', selectedUF: code }); try{ window.scrollTo(0,0) }catch(e){} }
 
-  nodes = [
-    { t: 'Categorização social', x: 'Organizar o mundo social em grupos ("entregadores", "passageiros", "a plataforma") é o primeiro passo do processo identitário descrito por Tajfel.' },
-    { t: 'Identidade social', x: 'A parte do autoconceito que deriva do pertencimento a grupos, junto com o valor emocional atribuído a esse pertencimento.' },
-    { t: 'Pertencimento', x: 'O sentimento de fazer parte. Nos estudos, aparece em nível grupal (a "tribo") e individual (ser visto e reconhecido).' },
-    { t: 'Comparação entre grupos', x: 'Comparar "nós" e "eles". Uma avaliação positiva do próprio grupo alimenta a autoestima coletiva.' },
-    { t: 'Autoestima coletiva', x: 'O valor que o grupo confere a si mesmo — fortalecido por símbolos, conquistas e reconhecimento entre pares.' },
-    { t: 'Normas do grupo', x: 'Expectativas de comportamento compartilhadas: rodízios em horários perigosos, estratégias comuns, códigos próprios.' }
-  ];
-
-  componentDidMount() {
-    const theme = this.props.theme ?? 'sistema';
-    if (theme !== 'sistema') document.documentElement.dataset.theme = theme;
-    else delete document.documentElement.dataset.theme;
-    this.makeQR();
+  ufList(){
+    return [
+      ['AC','Acre'],['AL','Alagoas'],['AP','Amapá'],['AM','Amazonas'],['BA','Bahia'],
+      ['CE','Ceará'],['DF','Distrito Federal'],['ES','Espírito Santo'],['GO','Goiás'],
+      ['MA','Maranhão'],['MT','Mato Grosso'],['MS','Mato Grosso do Sul'],['MG','Minas Gerais'],
+      ['PA','Pará'],['PB','Paraíba'],['PR','Paraná'],['PE','Pernambuco'],['PI','Piauí'],
+      ['RJ','Rio de Janeiro'],['RN','Rio Grande do Norte'],['RS','Rio Grande do Sul'],
+      ['RO','Rondônia'],['RR','Roraima'],['SC','Santa Catarina'],['SP','São Paulo'],
+      ['SE','Sergipe'],['TO','Tocantins']
+    ];
   }
+  ufName(code){ const f=this.ufList().find(u=>u[0]===code); return f?f[1]:''; }
 
-  makeQR() {
-    const tryGen = () => {
-      if (!window.QRCode) { setTimeout(tryGen, 300); return; }
-      const holder = document.createElement('div');
-      holder.style.cssText = 'position:absolute;left:-9999px;top:0';
-      document.body.appendChild(holder);
-      new window.QRCode(holder, { text: this.props.studyUrl ?? window.location.href, width: 512, height: 512, correctLevel: window.QRCode.CorrectLevel.M });
-      const grab = (tries) => {
-        const img = holder.querySelector('img');
-        const canvas = holder.querySelector('canvas');
-        const src = (img && img.src) || (canvas && canvas.toDataURL('image/png'));
-        if (src) { this.setState({ qrData: src }); document.querySelectorAll('img.qr-print').forEach(el => { el.src = src; }); holder.remove(); }
-        else if (tries < 20) setTimeout(() => grab(tries + 1), 150);
-        else holder.remove();
-      };
-      grab(0);
+  stateData(code){
+    const local = {
+      ES:[
+        ['Sindicato','SIMP/ES','Sindicato dos Motociclistas Profissionais do Estado do Espírito Santo.','',''],
+        ['Sindicato','Sintappes','Sindicato dos Trabalhadores de Aplicativos do Espírito Santo. Uma das principais entidades representativas, atua em debates na Assembleia Legislativa e em reuniões com órgãos de segurança para reivindicar melhores tarifas, segurança e pontos de apoio.','https://play.google.com/store/apps/details?id=com.sintappes.android&hl=pt_BR','Baixar o app'],
+        ['Sindicato','Sindmapes','Sindicato dos Motoristas de Aplicativos do Espírito Santo. Atua na defesa da categoria e está envolvido na articulação de cooperativas para oferecer alternativas às grandes plataformas.','https://www.sindimapes.com.br/','Acessar site'],
+        ['Associação','Amapes','Associação dos Motoristas de Aplicativos do Espírito Santo. Trabalha em parceria com o Sindmapes e mantém iniciativas como o aplicativo próprio "Amapese", focado em transporte executivo e segurança.','https://amapes.net/','Acessar site'],
+        ['Grupo','Coletivo Entregadores Antifascistas ES','Grupo focado na mobilização e organização de entregadores, participando ativamente de paralisações nacionais e atos por direitos básicos como auxílio-alimentação e seguro contra roubos.','https://www.instagram.com/entregadoresantifascistases/','Ver no Instagram']
+      ],
+      MG:[
+        ['Sindicato','SICOVAPP-MG','Sindicato dos Motoristas de Aplicativos de Minas Gerais.','https://sicovappmg.org.br/','Acessar site'],
+        ['Associação','AMAM-MG','Associação dos Motoristas de Aplicativo de Minas Gerais.','https://www.facebook.com/associacaomineirademotoristasdeaplicativo/','Ver no Facebook']
+      ],
+      RJ:[
+        ['Sindicato','SINDMOBI','Sindicato dos Motoristas por Meio de Aplicativo do Estado do Rio de Janeiro.','https://www.instagram.com/sindmobi/','Ver no Instagram'],
+        ['Grupo','Coletivo de Entregadores do Rio / Aliança dos Motoboys','Movimento de rua dos entregadores de delivery. Sem site fixo — mobilizações locais convocadas por redes de apoio no Centro e Zona Sul.','',''],
+        ['Associação','AIMA','Associação Inteligente dos Motoristas de Aplicativo do Rio de Janeiro.','https://aima.app.br/','Acessar site'],
+        ['Associação','APPRJ','Associação Profissionais por Aplicativos.','https://www.instagram.com/apprjoficial/','Ver no Instagram'],
+        ['Associação','AMERJ','Associação Movimento dos Entregadores do RJ.','https://www.instagram.com/amerj.oficial/','Ver no Instagram']
+      ],
+      SP:[
+        ['Associação','Amasp','Associação de Motoristas de Aplicativo de São Paulo. Fundada em 2016 e presidida por Eduardo Lima de Souza (Duda), é considerada a maior associação da categoria no Brasil, com mais de 30 mil associados. Foca na defesa política e representação dos motoristas e não cobra mensalidades.','https://www.instagram.com/amaspmotoristas/','Ver no Instagram'],
+        ['Sindicato','Stattesp','Sindicato dos Trabalhadores com Aplicativos de Transporte Terrestre do Estado de São Paulo. Fundado em 2018 com apoio da Força Sindical. Pautas: isenção de IPVA, seguros de acidentes custeados pelas plataformas, aposentadoria (INSS) e assessoria jurídica.','https://stattesp.com.br/home','Acessar site'],
+        ['Federação','Fenamoto','Federação Nacional dos Trabalhadores dos Motociclistas. Filiada à CNTTL, atua fortemente em São Paulo na unificação das pautas de motofretistas e entregadores.','https://www.fenamoto.com.br/','Acessar site']
+      ]
     };
-    tryGen();
+    return local[code] || [];
   }
 
-  renderVals() {
-    const s = this.state;
-    const Q = this.questions[s.qIndex];
-    const answered = s.qPicked !== null;
-    const qOptions = Q.opts.map((label, i) => {
-      let border = '1.5px solid rgba(255,255,255,.25)', bg = 'transparent', color = 'var(--inv-ink)';
-      if (answered && i === Q.correct) { border = '1.5px solid #4cc98e'; bg = 'rgba(76,201,142,.14)'; color = '#a8e8c9'; }
-      else if (answered && i === s.qPicked) { border = '1.5px solid var(--red)'; bg = 'rgba(224,69,75,.14)'; color = '#f2a3a6'; }
-      return { label, pick: () => { if (!answered) this.setState({ qPicked: i, qScore: s.qScore + (i === Q.correct ? 1 : 0) }); },
-        style: `text-align:left;font:500 13.5px 'IBM Plex Sans',sans-serif;padding:13px 16px;border-radius:4px;cursor:pointer;min-height:44px;border:${border};background:${bg};color:${color}` };
+  tagStyle(kind){
+    const map = { 'Sindicato':'#E10600','Grupo':'#111','Associação':'#555','Federação':'#0a7d3b','Apoio':'#0a7d3b','Nacional':'#E10600' };
+    const c = map[kind] || '#E10600';
+    return `display:inline-block;background:${c};color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:1.5px;padding:2px 8px;border-radius:3px;text-transform:uppercase`;
+  }
+
+  renderVals(){
+    const route = this.state.route;
+    const mkTab = (id,label)=>({
+      label, go:()=>this.go(id),
+      style: `flex:none;background:none;border:none;border-bottom:3px solid ${(route===id||(id==='recursos'&&route==='recursos-uf'))?'#E10600':'transparent'};color:${(route===id||(id==='recursos'&&route==='recursos-uf'))?'#fff':'#999'};font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;text-transform:uppercase;padding:12px 10px;cursor:pointer;white-space:nowrap`
     });
-    const tabBase = "font:600 13px 'IBM Plex Sans',sans-serif;padding:11px 20px;border-radius:2px;cursor:pointer;min-height:44px;border:1.5px solid var(--ink);";
-    const pos = [
-      { label: 'Experiências compartilhadas', desc: 'Vivências comuns criam a base do reconhecimento.', color: 'var(--red)', sign: '+' },
-      { label: 'Comunicação', desc: 'Grupos de mensagem e encontros sustentam o vínculo.', color: 'var(--red)', sign: '+' },
-      { label: 'Reconhecimento entre pares', desc: '"Ele passa pelo que eu passo."', color: 'var(--red)', sign: '+' },
-      { label: 'Objetivos comuns', desc: 'Propósitos compartilhados organizam subgrupos.', color: 'var(--red)', sign: '+' },
-      { label: 'Solidariedade', desc: 'Apoio mútuo em segurança, saúde e renda.', color: 'var(--red)', sign: '+' }
+
+    const code = this.state.selectedUF;
+    const local = code ? this.stateData(code) : [];
+    const stateResources = local.map(r=>({ tag:r[0], tagStyle:this.tagStyle(r[0]), name:r[1], desc:r[2], hasLink:!!r[3], link:r[3], linkLabel:r[4] }));
+
+
+
+    const B='https://www.dmtemdebate.com.br/';
+    const tl = [
+      ['Nov 2015','"Uberização do mundo"','A Uber chega ao Brasil em 2014 e, já em 2015, os efeitos do trabalho por aplicativo viram alvo de crítica e resistência.',true,B+'resistir-a-uberizacao-do-mundo/'],
+      ['Ago 2016','Terceirização','Em meio à ameaça da terceirização irrestrita no Brasil, o modelo dos aplicativos vira exemplo de precarização do trabalho.',true,B+'a-terceirizacao-e-a-uberizacao-do-trabalho-no-brasil/'],
+      ['Mar 2017','Greve em Londres','Entregadores da Deliveroo e do UberEATS param em Londres contra práticas abusivas — marco da organização na "gig economy".',false,B+'luta-nos-aplicativos-organizacao-dos-trabalhadores-da-deliveroo-e-ubereats-em-londres/'],
+      ['Jun 2017','Uber nos tribunais','Com 50 mil motoristas em mais de 50 cidades, a disputa sobre vínculo empregatício chega à Justiça brasileira, com sentenças divergentes.',true,B+'motorista-de-uber-e-funcionario-o-que-a-justica-brasileira-tem-decidido/'],
+      ['Mai 2019','Paralisação mundial','Motoristas de Uber, Cabify e 99 protestam em cidades do mundo inteiro no dia da estreia da Uber na bolsa de Nova York.',false,B+'uber-off-a-paralisacao-dos-motoristas-pode-ser-considerada-uma-greve/'],
+      ['Mai 2019','Trabalho neofeudal','Estudo do Ministério Público do Trabalho aponta como neofeudal o tipo de trabalho desenvolvido pelas plataformas.',true,B+'trabalho-na-uber-e-neofeudal-diz-estudo-sao-empreendedores-de-si-mesmo-proletarizados/'],
+      ['Mai 2019','"É cada um por si"','Relatos da rotina dos entregadores mostram jornadas exaustivas que penalizam a todos — em particular as mulheres.',true,B+'dormir-na-rua-e-pedalar-12-horas-por-dia-a-rotina-dos-entregadores-de-aplicativos/'],
+      ['Jun 2019','Califórnia','Lei em aprovação no estado onde a Uber nasceu reconhece vínculo entre plataformas e seus motoristas.',false,B+'lei-da-california-reconhece-motoristas-de-aplicativos-como-empregados/'],
+      ['Out 2019','"Você não estava aqui"','Filme de Ken Loach examina a uberização — para o diretor, o trabalho escravo moderno.',false,B+'ken-loach-uberizacao-e-o-trabalho-escravo-moderno/'],
+      ['Dez 2019','Dados do IBGE','Pesquisa revela alta de 29,2% no número de pessoas trabalhando em veículos entre 2017 e 2018 — 3,6 milhões.',true,B+'novo-mercado-tem-cada-vez-mais-pessoas-trabalhando-em-veiculos-ambulantes-e-entregadores/'],
+      ['Jan 2020','"Uber educacional"','Aplicativo para cadastro de docentes mostra que a uberização vai além do transporte e das entregas.',true,B+'contratacao-uberizada-de-professores-por-aplicativo-ja-e-realidade/'],
+      ['Fev 2020','Primeira decisão do TST','Turma do TST não reconhece vínculo de um motorista com a Uber — primeira decisão do tipo em instância superior no Brasil.',true,B+'decisoes-judiciais-abrem-precedente-para-consolidar-uberizacao-dos-empregos-por-aplicativo-no-brasil/'],
+      ['Mar 2020','Uberização na pandemia','O trabalho por aplicativo não para nos primeiros meses da Covid-19, expondo trabalhadores ao contágio.',true,B+'parceria-de-risco-aplicativos-lucram-com-coronavirus-pondo-entregadores-em-risco-de-contagio/'],
+      ['Jul 2020','Greve nacional','Entregadores param em 1º de julho para denunciar as condições precarizadas — a greve ganha força nacional.',true,B+'ganha-forca-a-greve-nacional-dos-entregadores-indignados/'],
+      ['Jul 2020','Situação nos tribunais','Levantamento revela que a maioria das decisões judiciais sobre vínculo tem sido favorável às empresas.',true,B+'entregadores-perdem-maioria-dos-casos-sobre-vinculo-empregaticio-com-aplicativos/'],
+      ['Jul 2020','#BrequeDosApps','A manifestação de 25 de julho fica conhecida como Breque dos Apps — um freio coletivo na uberização.',true,B+'breque-dos-apps-e-um-freio-coletivo-na-uberizacao-e-na-degradacao-e-exploracao-do-trabalho-entrevista-com-ludmila-abilio/'],
+      ['Jul 2020','Rumo à autogestão','Diante da queda nos pagamentos, entregadores buscam criar cooperativas para trabalhar sem patrão.',true,B+'adeus-ifood-entregadores-tentam-criar-cooperativa-para-trabalhar-sem-patrao/'],
+      ['Set 2020','3 milhões','Levantamento aponta que o Brasil chegou a 3 milhões de pessoas trabalhando por aplicativos em 2018.',true,B+'brasil-tem-3-milhoes-de-trabalhadores-e-trabalhadoras-vinculados-a-aplicativos-entrevista-especial-com-lucia-garcia/'],
+      ['Out 2020','Proposição 22','Empresas bancam lobby milionário na Califórnia para se isentar do reconhecimento de vínculo com motoristas.',false,B+'como-uber-e-lyft-estao-comprando-leis-trabalhistas/'],
+      ['Dez 2020','1 milhão de motoboys','Estudo do Dieese mostra que o Brasil chega a quase um milhão de motoboys, a maioria na informalidade.',true,B+'brasil-ja-tem-quase-um-milhao-de-motoboys-e-maioria-e-informal-diz-dieese/'],
+      ['Dez 2020','"Não há volta"','A aprovação da Proposição 22 mostra o poder das plataformas em moldar o mercado de trabalho.',false,B+'o-poder-infraestrutural-do-capitalismo-de-plataforma/'],
+      ['Fev 2021','Vitória no Reino Unido','Suprema Corte britânica decide: motoristas da Uber são trabalhadores, com direito a salário mínimo e férias.',false,B+'uber-perde-recurso-final-no-reino-unido-motoristas-sao-trabalhadores-nao-autonomos/'],
+      ['Fev 2021','Crescimento das plataformas','Relatório da OIT registra que as plataformas digitais de trabalho quintuplicaram em dez anos.',false,B+'plataformas-de-trabalho-digitais-aumentam-cinco-vezes-na-ultima-decada/'],
+      ['Mar 2021','Tempo de trabalho','A uberização transforma a relação da sociedade com o horário fixo e a jornada de trabalho.',false,B+'plataformas-digitais-transformam-o-tempo-de-trabalho-e-provocam-mudanca-nos-valores-da-sociedade-entrevista-com-cassio-da-silva-calvete/'],
+      ['Abr 2021','"Um tsunami"','Líder de entregadores alerta: a uberização e seus algoritmos chegarão em breve a outras profissões.',true,B+'precarizacao-e-rebeldia-na-garupa-de-uma-moto/'],
+      ['Abr 2021','Manipulação de jurisprudência','Justiça aponta estratégia da Uber de fechar acordos na véspera de julgamentos para evitar precedentes desfavoráveis.',true,B+'como-a-uber-manipula-jurisprudencia-para-evitar-reconhecimento-de-vinculo-de-emprego/'],
+      ['Mai 2021','"Ou você come ou paga a internet"','Trabalhadores de aplicativos se endividam para bancar os próprios custos do trabalho, como a internet.',true,B+'conexao-zero-estrelas-trabalhadores-de-aplicativos-se-endividam-para-pagar-a-internet/'],
+      ['Jul 2021','Um ano do Breque','"Depois da greve, nada mudou", avalia Galo, um dos articuladores do movimento dos entregadores.',true,B+'breque-dos-entregadores-completa-um-ano-depois-da-greve-nada-mudou-avalia-galo/'],
+      ['Jul 2021','40 projetos de lei','Estudo da FGV conta 40 PLs sobre trabalho em plataformas propostos em seis meses, sob impacto da pandemia.',true,B+'tres-projetos-para-regular-as-empresas-aplicativos/'],
+      ['Jul 2021','Gamificação','Pontuações, rankings e recompensas: o jogo das plataformas que os trabalhadores não podem vencer.',false,B+'nota-alta-renda-baixa-por-que-o-trabalho-por-plataformas-adora-a-gamificacao/'],
+      ['Ago 2021','Uberização no campo','Entregas e comércio eletrônico se aproximam do campo, ameaçando os pequenos agricultores.',true,B+'uberizacao-da-fazenda-quando-a-tecnologia-transforma-o-campo-em-negocio-de-grandes-empresas-entrevista-com-larissa-packer/'],
+      ['Set 2021','Novo breque','Entregadores realizam nova paralisação nacional por melhores condições e aumento da tarifa.',true,B+'boicote-breque-e-apagao-as-formas-de-resistencia-dos-trabalhadores-por-aplicativo/'],
+      ['Set 2021','Dumping social','Pela primeira vez a Uber é condenada por danos sociais, em decisão do TRT da 4ª Região.',true,B+'dumping-social-entenda-condenacao-inedita-e-milionaria-contra-a-uber-no-trt4/'],
+      ['Nov 2021','Disputas continuam','MPT acusa Uber, Rappi, 99 e Lalamove de fraude trabalhista; novos processos chegam ao TST.',true,B+'uber-rappi-99-e-lalamove-enfrentam-acao-judicial-para-reconhecimento-de-vinculo-de-entregadores-e-motoristas/'],
+      ['Dez 2021','Amadorização do trabalho','A uberização informaliza o controle e o gerenciamento, desfazendo formas estáveis e reguladas de trabalho.',true,B+'o-trabalhador-inserido-na-uberizacao-esta-longe-de-achar-que-a-moto-dele-e-uma-microempresa-entrevista-especial-com-ludmila-costhek-abilio/'],
+      ['Dez 2021','A uberização se espraia','A lógica das plataformas se espalha: Direito, cuidado, jornalismo, educação e fitness.',true,B+'a-lei-da-precarizacao-ameaca-os-advogados/'],
+      ['Mar 2022','Fairwork Brasil','Primeiro relatório do projeto internacional de trabalho decente dá notas baixíssimas às plataformas no Brasil.',true,B+'uber-99-rappi-e-ifood-tem-notas-pifias-em-avaliacao-sobre-trabalho-decente-no-brasil/'],
+      ['Abr 2022','TST reconhece vínculo','Turma do TST reconhece vínculo de um motorista com a Uber, mas ainda sem jurisprudência clara.',true,B+'quais-os-fundamentos-do-tst-para-reconhecer-vinculo-de-emprego-com-a-uber/'],
+      ['Abr 2022','Jurimetria','Uber usa análise de dados dos tribunais para se blindar contra decisões desfavoráveis.',true,B+'como-a-uber-se-blinda-para-impedir-que-a-justica-reconheca-vinculo-trabalhista-de-motoristas/'],
+      ['Jan 2023','TST x TST','Decisões antagônicas entre turmas do TST mantêm a controvérsia sobre o vínculo empregatício.',true,B+'tst-x-uber-motoristas-terao-direitos-trabalhistas-para-2023/'],
+      ['Mar 2023','Busca por regulamentação','Governo promete regulamentar o trabalho por aplicativos, mas ainda sem consenso sobre como.',true,B+'uberizacao-traz-novo-controle-dos-modos-de-vida-e-de-luta-dos-trabalhadores-entrevista-com-ludmila-abilio/'],
+      ['Mar 2023','A uberização da vida','Dados do IPEA: mais motoristas e entregadores em seis anos, com queda nos rendimentos.',true,B+'em-dados-a-uberizacao-da-vida/'],
+      ['Mai 2023','Greve nacional','Ocorre a primeira greve nacional de motoristas de aplicativo no governo Lula.',true,B+'reflexoes-a-partir-da-greve-na-uber/'],
+      ['Jun 2023','Proposta das empresas','Associação de 99, Amazon, iFood e Uber apresenta sua proposta no grupo de trabalho da regulamentação.',true,B+'revelacoes-da-carta-de-principios-da-abomitec/'],
+      ['Jul 2023','Fairwork 2023','Novo relatório de trabalho decente registra poucas melhoras — e também pioras — nas plataformas.',true,B+'fairwork-brasil-2023-pesquisa-avalia-condicoes-de-trabalho-por-plataformas-no-brasil/']
     ];
-    const neg = [
-      { label: 'Isolamento', desc: 'Trabalho disperso, sem locais de encontro formais.', color: 'var(--muted)', sign: '−' },
-      { label: 'Competição', desc: 'Disputa por corridas incentivada pelo modelo.', color: 'var(--muted)', sign: '−' },
-      { label: 'Alta rotatividade', desc: 'Identidade profissional provisória, "trabalho amador".', color: 'var(--muted)', sign: '−' },
-      { label: 'Individualização', desc: 'A narrativa do "patrão de si" desloca o foco do coletivo.', color: 'var(--muted)', sign: '−' },
-      { label: 'Algoritmos', desc: 'Gerenciamento algorítmico fragmenta rotinas e vínculos.', color: 'var(--muted)', sign: '−' }
-    ];
-    const node = this.nodes[s.selNode];
-    return {
-      menuOpen: s.menuOpen,
-      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
-      closeMenu: () => this.setState({ menuOpen: false }),
-      stickerOpen: s.stickerOpen,
-      openSticker: () => this.setState({ stickerOpen: true, menuOpen: false }, () => { const d = this.state.qrData; if (d) setTimeout(() => document.querySelectorAll('img.qr-print').forEach(el => { el.src = d; }), 50); }),
-      closeSticker: () => this.setState({ stickerOpen: false }),
-      stopProp: (e) => e.stopPropagation(),
-      printSticker: () => { this.setState({ stickerOpen: false }, () => setTimeout(() => window.print(), 150)); },
-      qrData: s.qrData || 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', qrReady: !!s.qrData, qrLoading: !s.qrData,
-      stickerCopies: [1, 2, 3, 4],
-      mapNodes: this.nodes.map((n, i) => ({
-        label: n.t, pick: () => this.setState({ selNode: i }),
-        style: `font:600 12.5px 'IBM Plex Sans',sans-serif;padding:10px 16px;border-radius:20px;cursor:pointer;min-height:44px;border:1.5px solid ${i === s.selNode ? 'var(--red)' : 'var(--line)'};background:${i === s.selNode ? 'var(--red)' : 'var(--surface)'};color:${i === s.selNode ? '#fff' : 'var(--ink)'}`
-      })),
-      nodeTitle: node.t, nodeText: node.x,
-      showPos: () => this.setState({ showNeg: false }),
-      showNeg: () => this.setState({ showNeg: true }),
-      posTabStyle: tabBase + (s.showNeg ? 'background:transparent;color:var(--ink)' : 'background:var(--ink);color:var(--bg)'),
-      negTabStyle: tabBase + (s.showNeg ? 'background:var(--ink);color:var(--bg)' : 'background:transparent;color:var(--ink)'),
-      factors: s.showNeg ? neg : pos,
-      quizActive: !s.quizDone, quizDone: s.quizDone,
-      qProgress: `Pergunta ${s.qIndex + 1} de ${this.questions.length}`,
-      qText: Q.q, qOptions, qAnswered: answered,
-      qFeedback: answered ? (s.qPicked === Q.correct ? Q.fb : 'Não exatamente. ' + Q.fb.replace(/^(Correto|Isso|Exato):?\s*/i, 'A literatura indica: ')) : '',
-      nextLabel: s.qIndex + 1 < this.questions.length ? 'Próxima →' : 'Ver resultado',
-      nextQ: () => {
-        if (s.qIndex + 1 < this.questions.length) this.setState({ qIndex: s.qIndex + 1, qPicked: null });
-        else this.setState({ quizDone: true });
-      },
-      restartQuiz: () => this.setState({ qIndex: 0, qPicked: null, qScore: 0, quizDone: false }),
-      scoreText: `${s.qScore}/${this.questions.length}`,
-      scoreMsg: s.qScore >= 4 ? 'Excelente! Você compreendeu os principais conceitos da Teoria da Identidade Social.' : s.qScore >= 2 ? 'Bom caminho! Revisite as seções sobre a teoria e os achados para consolidar os conceitos.' : 'Que tal reler as seções? A teoria de Tajfel fica mais clara na segunda passada.'
+    const itemFrac = 0.4, stepFrac = 0.8; // 2.5 visíveis, avança 2
+    const tlPages = Math.round((tl.length*itemFrac - 1)/stepFrac) + 1;
+    const tlPage = Math.min(this.state.tlPage, tlPages-1);
+    const tlBtn = (disabled)=>`flex:none;width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:${disabled?'#eee':'#0a0a0a'};color:${disabled?'#bbb':'#fff'};border:none;border-radius:50%;font-family:'Anton',sans-serif;font-size:14px;line-height:1;cursor:${disabled?'default':'pointer'};padding:0`;
+    const timeline = tl.map((e)=>{
+      const accent = e[3]?'#E10600':'#0a0a0a';
+      return {
+        year:e[0], title:e[1], desc:e[2], brazil:e[3], hasLink:!!e[4], link:e[4],
+        dotStyle:`width:16px;height:16px;border-radius:50%;border:3px solid #fafafa;background:${accent};box-shadow:0 0 0 2px ${accent}`,
+        yearStyle:`font-family:'Anton',sans-serif;font-size:14px;letter-spacing:1px;color:${accent};text-align:center`,
+        cardStyle:`flex:1;background:#fff;border:1px solid #ececec;border-top:4px solid ${accent};border-radius:10px;padding:11px 12px;box-shadow:0 1px 3px rgba(0,0,0,.05)`
+      };
+    });
+    const tlTrackStyle = `display:flex;align-items:stretch`;
+
+    const model = this.state.model;
+    const roleMap = { entregador:'Entregador', motorista:'Motorista', ambos:'Entregador + Motorista' };
+    const taglineMap = {
+      entregador:'Cada corrida é uma corrida por direitos.',
+      motorista:'Rodar com dignidade também é direito.',
+      ambos:'Duas ou quatro rodas, a luta é uma só.'
     };
+    const bgMap = {
+      entregador:'linear-gradient(135deg,#E10600,#a30400)',
+      motorista:'linear-gradient(135deg,#c40500,#6e0300)',
+      ambos:'linear-gradient(135deg,#E10600 0%,#a30400 55%,#0a0a0a 130%)'
+    };
+    const modelTabs = [['entregador','Entregador'],['motorista','Motorista'],['ambos','Ambos']].map(m=>({
+      label:m[1], go:()=>this.setState({model:m[0]}),
+      style:`flex:1;background:${model===m[0]?'#0a0a0a':'transparent'};color:${model===m[0]?'#fff':'#666'};border:none;border-radius:7px;padding:10px 4px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:.5px;text-transform:uppercase;cursor:pointer`
+    }));
+
+    return {
+      year: 2026,
+      tabs: [ mkTab('inicio','Início'), mkTab('recursos','Recursos'), mkTab('adesivo','Adesivo') ],
+      goHome:()=>this.go('inicio'), goAdesivo:()=>this.go('adesivo'), goRecursos:()=>this.go('recursos'),
+      isInicio: route==='inicio', isConquistas: route==='conquistas',
+      isRecursos: route==='recursos', isRecursosUF: route==='recursos-uf', isAdesivo: route==='adesivo',
+
+      ...this.fdVals(),
+      spaces: [
+        {title:'Grupos de mensagem', body:'WhatsApp e Telegram: dicas, alertas de segurança e apoio mútuo.', top:'#E10600'},
+        {title:'Pontos de espera', body:'Praças e portas de restaurantes como locais de encontro e conversa.', top:'#fff'},
+        {title:'Redes sociais', body:'Páginas e canais onde circulam informações, memes e relatos.', top:'#fff'},
+        {title:'Associações', body:'Instâncias autônomas descritas nos estudos, mediadas pela comunicação digital.', top:'#E10600'}
+      ].map(s=>({...s, cardStyle:`background:#161616;border:1px solid #262626;border-top:3px solid ${s.top};padding:16px 15px 17px`})),
+      findings: [
+        {title:'"Sou meu próprio patrão"... será?', body:'Os estudos mostram que muitos motoristas entram nas plataformas buscando autonomia e liberdade. No entanto, na prática, as regras dos aplicativos, os algoritmos e as avaliações limitam essa autonomia e aproximam o trabalho de uma relação de subordinação.'},
+        {title:'Mesmo trabalhando sozinho, ninguém trabalha completamente sozinho.', body:'A literatura mostra que motoristas criam grupos de WhatsApp, pontos de encontro, associações e outras redes para trocar informações, pedir ajuda e enfrentar juntos os desafios do trabalho. É nesses espaços que surgem os laços entre a categoria.'},
+        {title:'Quando os problemas são parecidos, cresce o sentimento de que "estamos no mesmo barco".', body:'Ao compartilhar dificuldades, estratégias e experiências, muitos trabalhadores passam a se reconhecer como parte de um mesmo grupo, e não apenas como indivíduos competindo entre si.'},
+        {title:'A mobilização começa quando aparece um objetivo em comum.', body:'Os estudos mostram que movimentos, associações, cooperativas e paralisações costumam surgir quando trabalhadores percebem que problemas individuais são, na verdade, compartilhados por toda a categoria.'}
+      ],
+      timeline, tlTrackStyle,
+      tlPage: tlPage+1, tlPages,
+      tlPrevDisabled: tlPage===0, tlNextDisabled: tlPage>=tlPages-1,
+      tlPrevStyle: tlBtn(tlPage===0), tlNextStyle: tlBtn(tlPage>=tlPages-1),
+      tlScrollRef:(el)=>{ this._tlScroll=el; },
+      tlOnScroll:(e)=>{ const el=e.target; const p=Math.min(tlPages-1,Math.round(el.scrollLeft/(el.clientWidth*0.8))); if(p!==this.state.tlPage) this.setState({tlPage:p}); },
+      tlPrev:()=>{ this.tlAnimateBy(-0.8); },
+      tlNext:()=>{ this.tlAnimateBy(0.8); },
+      ufOptions: this.ufList().filter(u=>['ES','MG','RJ','SP'].includes(u[0])).map(u=>({code:u[0],label:`${u[1]} (${u[0]})`})),
+      selectedUF: code,
+      onSelectUF:(e)=>{ const v=e.target.value; if(v) this.openUF(v); },
+      quickUFs: [['ES','Espírito Santo'],['MG','Minas Gerais'],['RJ','Rio de Janeiro'],['SP','São Paulo']].map(q=>({name:q[1],go:()=>this.openUF(q[0])})),
+      ufCode: code, ufName: this.ufName(code),
+      stateResources,
+      modelTabs, stickerRole: roleMap[model], stickerTagline: taglineMap[model],
+      showBox: model==='entregador'||model==='ambos',
+      showWheel: model==='motorista'||model==='ambos',
+      stickerStyle:`background:#E10600;background:${bgMap[model]};border-radius:10px;padding:18px 18px 16px;min-height:150px;display:flex;flex-direction:column`,
+      qrRef:(el)=>{ this._qrEl=el; },
+      doPrint:()=>{ try{ window.print() }catch(e){} },
+      printSteps:[
+        {n:'1',t:'Escolha o modelo que combina com seu trampo.'},
+        {n:'2',t:'Toque em Imprimir (ou salve o arquivo e leve numa gráfica).'},
+        {n:'3',t:'Cole no baú, capacete, mochila ou carro.'},
+        {n:'4',t:'Pronto! Quem apontar a câmera cai direto no Tamo Junto.'}
+      ]
+    };
+  }
+
+  fdVals(){
+    const plus = [
+      {title:'"Acontece com você também?"', body:'Perceber que outros vivem os mesmos desafios aproxima os trabalhadores.'},
+      {title:'"Tem um grupo no WhatsApp?"', body:'É nesses grupos que muita informação, ajuda e apoio circulam.'},
+      {title:'"Ele entende o que eu passo."', body:'Reconhecer a experiência do outro fortalece o sentimento de pertencimento.'},
+      {title:'"Esse problema não é só meu."', body:'Quando as dificuldades são compartilhadas, fica mais fácil buscar soluções em conjunto.'},
+      {title:'"Hoje eu ajudo, amanhã podem me ajudar."', body:'A troca de apoio fortalece os vínculos entre os colegas trabalhadores.'}
+    ];
+    const minus = [
+      {title:'"Cada um corre por si."', body:'Quando cada trabalhador pensa apenas na própria corrida, fica mais difícil construir união.'},
+      {title:'"Todo mundo é concorrente."', body:'A competição pode enfraquecer os laços entre trabalhadores.'},
+      {title:'"Sou meu próprio patrão."', body:'Essa ideia pode fazer muitos trabalhadores deixarem de perceber que compartilham os mesmos desafios.'},
+      {title:'"O aplicativo decide."', body:'Regras, avaliações e bloqueios afetam o trabalho de todos.'},
+      {title:'"Nem conheço os outros colegas"', body:'Sem espaços de convivência, criar vínculos fica mais difícil.'}
+    ];
+    const isPlus = this.state.fd==='plus';
+    const btn=(active)=>`flex:none;background:${active?'#0a0a0a':'#fff'};color:${active?'#fff':'#111'};border:1px solid #0a0a0a;border-radius:8px;padding:10px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14.5px;letter-spacing:.5px;cursor:pointer`;
+    const accent = isPlus?'#E10600':'#0a0a0a';
+    return {
+      fdItems: isPlus?plus:minus,
+      fdSign: isPlus?'+':'−',
+      fdSignStyle:`flex:none;font-family:'Anton',sans-serif;font-size:16px;color:${accent};align-self:center`,
+      fdCardStyle:`display:flex;gap:12px;background:#fff;border:1px solid #ececec;border-left:4px solid ${accent};border-radius:10px;padding:14px 15px;margin-bottom:11px;box-shadow:0 1px 3px rgba(0,0,0,.05)`,
+      fdPlusBtnStyle:btn(isPlus), fdMinusBtnStyle:btn(!isPlus),
+      fdShowPlus:()=>this.setState({fd:'plus'}), fdShowMinus:()=>this.setState({fd:'minus'})
+    };
+  }
+
+  tlAnimateBy(frac){
+    const el=this._tlScroll; if(!el) return;
+    if(this._tlRaf) cancelAnimationFrame(this._tlRaf);
+    const from=el.scrollLeft;
+    const to=Math.max(0,Math.min(el.scrollWidth-el.clientWidth,from+el.clientWidth*frac));
+    const dur=550, t0=performance.now();
+    const prevSnap=el.style.scrollSnapType; el.style.scrollSnapType='none';
+    const ease=t=>t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; // easeInOutCubic
+    const step=(now)=>{
+      const t=Math.min(1,(now-t0)/dur);
+      el.scrollLeft=from+(to-from)*ease(t);
+      if(t<1){ this._tlRaf=requestAnimationFrame(step); }
+      else { el.style.scrollSnapType=prevSnap; this._tlRaf=null; }
+    };
+    this._tlRaf=requestAnimationFrame(step);
+  }
+
+  componentDidUpdate(){ this.paintQR(); }
+  componentDidMount(){ this.paintQR(); }
+  paintQR(){
+    if(!this._qrEl) return;
+    const seedMap = { entregador:7, motorista:13, ambos:21 };
+    const seed = seedMap[this.state.model]||7;
+    const el = this._qrEl;
+    el.innerHTML='';
+    const N=21, size=78, gap=size/N;
+    const s0=seed*997+3;
+    let s=s0;
+    const rnd=()=>{ s=(s*1103515245+12345)&0x7fffffff; return (s>>15)&1; };
+    const finderVal=(r,c)=>{
+      const test=(or_,oc)=>{ const dr=r-or_,dc=c-oc; if(dr<0||dr>6||dc<0||dc>6)return null; const ring=Math.max(Math.abs(dr-3),Math.abs(dc-3)); return (ring<=1||ring===3)?1:0; };
+      let v=test(0,0); if(v!==null&&r<7&&c<7)return v;
+      v=test(0,N-7); if(v!==null&&r<7&&c>=N-7)return v;
+      v=test(N-7,0); if(v!==null&&r>=N-7&&c<7)return v;
+      return null;
+    };
+    const frag=document.createDocumentFragment();
+    for(let r=0;r<N;r++)for(let c=0;c<N;c++){
+      const f=finderVal(r,c); const on = f!==null?f:rnd();
+      if(on){ const d=document.createElement('div'); d.style.cssText=`position:absolute;left:${c*gap}px;top:${r*gap}px;width:${gap+0.6}px;height:${gap+0.6}px;background:#0a0a0a`; frag.appendChild(d); }
+    }
+    el.style.position='relative'; el.appendChild(frag);
   }
 }
 </script>
