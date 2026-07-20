@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#17161a">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#17161a"/>
+<circle cx="520" cy="330" r="90" fill="#c22128"/>
+<text x="600" y="560" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="120" fill="#f2f0ed">TJ.</text>
+</svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--bg:#fcfbfa;--surface:#fff;--ink:#17161a;--muted:#57555c;--line:rgba(23,22,26,.14);--red:#c22128;--red-soft:rgba(194,33,40,.08);--inv-bg:#17161a;--inv-ink:#f2f0ed;--inv-muted:#b3b0b6}
+@media (prefers-color-scheme:dark){:root{--bg:#131215;--surface:#1c1b1f;--ink:#f2f0ed;--muted:#a5a2a8;--line:rgba(242,240,237,.16);--red:#e0454b;--red-soft:rgba(224,69,75,.12);--inv-bg:#0d0c0f;--inv-ink:#f2f0ed;--inv-muted:#a5a2a8}}
+html[data-theme="light"]{--bg:#fcfbfa;--surface:#fff;--ink:#17161a;--muted:#57555c;--line:rgba(23,22,26,.14);--red:#c22128;--red-soft:rgba(194,33,40,.08);--inv-bg:#17161a;--inv-ink:#f2f0ed;--inv-muted:#b3b0b6}
+html[data-theme="dark"]{--bg:#131215;--surface:#1c1b1f;--ink:#f2f0ed;--muted:#a5a2a8;--line:rgba(242,240,237,.16);--red:#e0454b;--red-soft:rgba(224,69,75,.12);--inv-bg:#0d0c0f;--inv-ink:#f2f0ed;--inv-muted:#a5a2a8}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--red);text-decoration:none}a:hover{color:var(--ink)}
+details summary{cursor:pointer;list-style:none}details summary::-webkit-details-marker{display:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#sticker-sheet{display:none}
+@media print{.site{display:none!important}#sticker-sheet{display:grid!important}}
+@page{margin:12mm}
+</style></helmet>
+
+<div id="sticker-sheet" style="grid-template-columns:1fr 1fr;gap:10mm;background:#fff;padding:6mm">
+  <sc-for list="{{ stickerCopies }}" as="s" hint-placeholder-count="4">
+    <div style="border:2.5px dashed #c9c6c2;border-radius:14px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:12px;background:#fff;color:#17161a;break-inside:avoid">
+      <div style="display:flex;align-items:center;gap:9px"><span style="width:20px;height:20px;background:#c22128;border-radius:50%;display:inline-block"></span><span style="font:700 20px 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Tamo Junto<span style="color:#c22128">.</span></span></div>
+      <img class="qr-print" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="QR Code" style="width:150px;height:150px">
+      <p style="margin:0;font:500 11.5px/1.45 'IBM Plex Sans',sans-serif;text-align:center;max-width:200px">Aponte a câmera e conheça o que a ciência revela sobre identidade social entre trabalhadores de aplicativos.</p>
+      <span style="font:500 8.5px 'IBM Plex Mono',monospace;color:#8a878d;letter-spacing:.08em;text-transform:uppercase">Divulgação científica · Revisão integrativa</span>
+    </div>
+  </sc-for>
+</div>
+
+<div class="site" style="min-height:100vh">
+<header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:2px solid var(--ink)">
+  <div style="max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:13px 20px">
+    <a href="#topo" style="display:flex;align-items:center;gap:10px;color:var(--ink)"><span style="width:22px;height:22px;background:var(--red);border-radius:50%;display:inline-block;flex:none"></span><span style="font:700 16px 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Tamo Junto<span style="color:var(--red)">.</span></span></a>
+    <button onClick="{{ toggleMenu }}" aria-label="Menu" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:4.5px;padding:8px;min-width:44px;min-height:44px;justify-content:center;align-items:flex-end">
+      <span style="width:22px;height:2px;background:var(--ink);border-radius:2px"></span><span style="width:22px;height:2px;background:var(--ink);border-radius:2px"></span><span style="width:15px;height:2px;background:var(--red);border-radius:2px"></span>
+    </button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="border-top:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;padding:8px 0 14px;animation:fadeUp .18s ease">
+      <a href="#teoria" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O que é identidade social?</a>
+      <a href="#mapa" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Mapa conceitual</a>
+      <a href="#achados" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O que os estudos encontraram</a>
+      <a href="#fluxo" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Como o pertencimento é construído</a>
+      <a href="#redes" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O papel das redes</a>
+      <a href="#fatores" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Fortalece × dificulta</a>
+      <a href="#quiz" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">Quiz</a>
+      <a href="#lacunas" onClick="{{ closeMenu }}" style="padding:12px 24px;font:600 14px 'IBM Plex Sans',sans-serif;color:var(--ink)">O que falta pesquisar</a>
+      <button onClick="{{ openSticker }}" style="margin:10px 24px 0;background:var(--red);color:#fff;border:none;border-radius:2px;padding:13px;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer">Imprimir adesivo com QR Code</button>
+    </nav>
+  </sc-if>
+</header>
+
+<main id="topo" style="max-width:760px;margin:0 auto">
+  <section data-screen-label="Hero" style="padding:52px 24px 44px;display:flex;flex-direction:column;gap:16px">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Divulgação científica · Psicologia Social</span>
+    <h1 style="margin:0;font:700 clamp(48px,13vw,72px)/0.98 'IBM Plex Sans',sans-serif;letter-spacing:-.03em">Tamo<br>Junto<span style="color:var(--red)">.</span></h1>
+    <p style="margin:0;font:400 17px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted);max-width:42ch;text-wrap:pretty">O que a ciência revela sobre identidade social entre trabalhadores de aplicativos.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+      <a href="#porque" style="background:var(--ink);color:var(--bg);font:600 14px 'IBM Plex Sans',sans-serif;padding:14px 30px;border-radius:2px">Explorar →</a>
+      <button onClick="{{ openSticker }}" style="background:none;border:1.5px solid var(--ink);color:var(--ink);font:600 14px 'IBM Plex Sans',sans-serif;padding:13px 22px;border-radius:2px;cursor:pointer">Adesivo QR</button>
+    </div>
+    <span style="font:500 9.5px 'IBM Plex Mono',monospace;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:3px;padding:5px 9px;align-self:flex-start">Produto técnico derivado de revisão integrativa</span>
+  </section>
+
+  <section style="display:grid;grid-template-columns:1fr 1fr" data-screen-label="Blocos-índice">
+    <a href="#fluxo" style="background:var(--red);color:#fff;padding:22px 20px;display:flex;flex-direction:column;gap:6px;min-height:96px"><span style="font:600 10px 'IBM Plex Mono',monospace;opacity:.75">01</span><b style="font:600 14.5px/1.3">Como surge o pertencimento?</b></a>
+    <a href="#achados" style="background:var(--inv-bg);color:var(--inv-ink);padding:22px 20px;display:flex;flex-direction:column;gap:6px"><span style="font:600 10px 'IBM Plex Mono',monospace;opacity:.75">02</span><b style="font:600 14.5px/1.3">O que os estudos encontraram?</b></a>
+    <a href="#fatores" style="background:var(--surface);color:var(--ink);padding:22px 20px;display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--ink)"><span style="font:600 10px 'IBM Plex Mono',monospace;color:var(--muted)">03</span><b style="font:600 14.5px/1.3">O que fortalece o coletivo?</b></a>
+    <a href="#lacunas" style="background:var(--surface);color:var(--ink);padding:22px 20px;display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--red)"><span style="font:600 10px 'IBM Plex Mono',monospace;color:var(--red)">04</span><b style="font:600 14.5px/1.3">O que ainda falta pesquisar?</b></a>
+  </section>
+
+  <section id="porque" data-screen-label="Por que existe" style="padding:44px 24px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Por que este material existe?</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Da revisão à divulgação</h2>
+    <p style="margin:0;font:400 15px/1.65 'IBM Plex Sans',sans-serif;color:var(--muted);text-wrap:pretty">Este site transforma os resultados de uma <b style="color:var(--ink)">revisão integrativa da literatura</b> em uma experiência de divulgação científica. Cada seção sintetiza o que os estudos identificaram sobre identidade social, pertencimento e formação de coletivos entre trabalhadores de aplicativos — com linguagem descritiva e baseada em evidências.</p>
+  </section>
+
+  <section id="teoria" data-screen-label="Teoria" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">A teoria · Henri Tajfel</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">O que é identidade social?</h2>
+    <p style="margin:0;font:400 15px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">A Teoria da Identidade Social explica como o "nós" se torna parte do "eu". Toque em cada processo:</p>
+    <details style="background:var(--surface);border:2px solid var(--ink);border-radius:2px">
+      <summary style="padding:16px 18px;display:flex;align-items:center;gap:12px"><span style="width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;flex:none">1</span><b style="font:600 15px 'IBM Plex Sans',sans-serif">Categorização social</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary>
+      <p style="margin:0;padding:0 18px 16px 64px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Organizamos o mundo social em categorias: "entregadores", "motoristas", "passageiros", "a plataforma". Categorizar simplifica — e define fronteiras entre grupos.</p>
+    </details>
+    <details style="background:var(--surface);border:2px solid var(--ink);border-radius:2px">
+      <summary style="padding:16px 18px;display:flex;align-items:center;gap:12px"><span style="width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;flex:none">2</span><b style="font:600 15px 'IBM Plex Sans',sans-serif">Identificação</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary>
+      <p style="margin:0;padding:0 18px 16px 64px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Passamos a nos ver como parte de um grupo — e ele passa a fazer parte de quem somos. Surge o sentimento de pertencimento e a autoestima coletiva.</p>
+    </details>
+    <details style="background:var(--surface);border:2px solid var(--ink);border-radius:2px">
+      <summary style="padding:16px 18px;display:flex;align-items:center;gap:12px"><span style="width:34px;height:34px;border-radius:50%;background:var(--surface);border:2px solid var(--red);color:var(--red);display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;flex:none">3</span><b style="font:600 15px 'IBM Plex Sans',sans-serif">Comparação entre grupos</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary>
+      <p style="margin:0;padding:0 18px 16px 64px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Comparamos o nosso grupo a outros. Uma avaliação positiva do próprio grupo fortalece a autoestima coletiva e as normas compartilhadas.</p>
+    </details>
+  </section>
+
+  <section id="mapa" data-screen-label="Mapa conceitual" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Mapa conceitual interativo</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Os conceitos, conectados</h2>
+    <p style="margin:0;font:400 14px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Toque em um conceito para ver a explicação.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="6">
+        <button onClick="{{ n.pick }}" style="{{ n.style }}">{{ n.label }}</button>
+      </sc-for>
+    </div>
+    <div style="background:var(--surface);border-left:4px solid var(--red);padding:16px 18px;border-radius:0 2px 2px 0;min-height:64px">
+      <b style="font:600 14px 'IBM Plex Sans',sans-serif">{{ nodeTitle }}</b>
+      <p style="margin:6px 0 0;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">{{ nodeText }}</p>
+    </div>
+  </section>
+
+  <section id="achados" data-screen-label="Achados" style="padding:44px 24px;background:var(--inv-bg);color:var(--inv-ink);display:flex;flex-direction:column;gap:14px">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Achados da revisão</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">O que a literatura aponta</h2>
+    <div style="border-left:3px solid var(--red);padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">Os estudos identificam que a narrativa do <b style="color:var(--inv-ink)">"empreendedor de si"</b> pode afastar o trabalhador do reconhecimento como categoria — um "autogerenciamento subordinado". <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[1,3]</a></p></div>
+    <div style="border-left:3px solid #fff;padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">Sem espaços formais de convivência, os autores encontraram trabalhadores <b style="color:var(--inv-ink)">coconstruindo identidade em grupos informais</b> — unidos por pessoas, propósitos e rotinas. <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[4]</a></p></div>
+    <div style="border-left:3px solid var(--red);padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">As pesquisas sugerem que o pertencimento ocorre em dois níveis: <b style="color:var(--inv-ink)">grupal</b> (a "tribo", com símbolos próprios) e <b style="color:var(--inv-ink)">individual</b> (sentir-se visto e reconhecido). <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[4]</a></p></div>
+    <div style="border-left:3px solid #fff;padding:4px 0 4px 16px"><p style="margin:0;font:400 14px/1.65 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">Em um dos estudos, <b style="color:var(--inv-ink)">93% dos motoristas participavam de grupos de WhatsApp</b> — espaços de apoio e aprendizado mútuo. <a href="#refs" style="font:600 11px 'IBM Plex Mono',monospace">[3]</a></p></div>
+  </section>
+
+  <section id="fluxo" data-screen-label="Fluxo do pertencimento" style="padding:44px 24px;display:flex;flex-direction:column;gap:18px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Fluxo observado na literatura</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Como o pertencimento é construído</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border-left:2px solid var(--line);padding-left:20px;position:relative">
+      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--red)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Experiências semelhantes</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Mesmas rotas, mesmas esperas, mesmos desafios cotidianos.</p></div>
+      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--red)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Reconhecimento mútuo</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">"Ele passa pelo que eu passo" — o outro deixa de ser concorrente.</p></div>
+      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--ink)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Identificação</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">O "eu" começa a incluir o "nós": surge a identidade compartilhada.</p></div>
+      <div style="padding:0 0 20px;position:relative"><span style="position:absolute;left:-27px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--ink)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Sentimento de grupo</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Normas, símbolos e apoio mútuo consolidam o coletivo.</p></div>
+      <div style="padding:0;position:relative"><span style="position:absolute;left:-29px;top:0;width:16px;height:16px;border-radius:50%;background:var(--red);border:3px solid var(--bg)"></span><b style="font:600 14.5px 'IBM Plex Sans',sans-serif;color:var(--red)">Ações coletivas</b><p style="margin:3px 0 0;font:400 13px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Descritas pela literatura como desdobramento observado desse processo.</p></div>
+    </div>
+  </section>
+
+  <section id="redes" data-screen-label="O papel das redes" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">O papel das redes</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Onde o coletivo acontece</h2>
+    <p style="margin:0;font:400 14px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">As pesquisas descrevem espaços — digitais e físicos — onde a identidade coletiva se forma:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--red);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Grupos de mensagem</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">WhatsApp e Telegram: dicas, alertas de segurança e apoio mútuo.</p></div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Pontos de espera</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Praças e portas de restaurantes como locais de encontro e conversa.</p></div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--ink);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Redes sociais</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Páginas e canais onde circulam informações, memes e relatos.</p></div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--red);padding:16px;display:flex;flex-direction:column;gap:6px"><b style="font:600 14px 'IBM Plex Sans',sans-serif">Associações</b><p style="margin:0;font:400 12.5px/1.55 'IBM Plex Sans',sans-serif;color:var(--muted)">Instâncias autônomas descritas nos estudos, mediadas pela comunicação digital.</p></div>
+    </div>
+  </section>
+
+  <section id="fatores" data-screen-label="Fortalece × dificulta" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Fortalece × dificulta</h2>
+    <div style="display:flex;gap:8px">
+      <button onClick="{{ showPos }}" style="{{ posTabStyle }}">Fortalece +</button>
+      <button onClick="{{ showNeg }}" style="{{ negTabStyle }}">Dificulta −</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <sc-for list="{{ factors }}" as="f" hint-placeholder-count="5">
+        <div style="display:flex;align-items:center;gap:12px;background:var(--surface);border-radius:2px;padding:13px 16px;border-left:4px solid {{ f.color }};animation:fadeUp .25s ease both"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:600 13.5px 'IBM Plex Sans',sans-serif">{{ f.label }}</span><span style="font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:var(--muted)">{{ f.desc }}</span></div><span style="margin-left:auto;font:600 12px 'IBM Plex Mono',monospace;color:{{ f.color }}">{{ f.sign }}</span></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="quiz" data-screen-label="Quiz" style="padding:44px 24px;background:var(--inv-bg);color:var(--inv-ink);display:flex;flex-direction:column;gap:14px">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Teste o que aprendeu</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Quiz: identidade social</h2>
+    <sc-if value="{{ quizDone }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(255,255,255,.06);border-radius:4px;padding:28px 22px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;animation:fadeUp .3s ease">
+        <span style="font:700 44px 'IBM Plex Mono',monospace;color:var(--red)">{{ scoreText }}</span>
+        <p style="margin:0;font:400 14px/1.6 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">{{ scoreMsg }}</p>
+        <button onClick="{{ restartQuiz }}" style="background:var(--red);color:#fff;border:none;border-radius:2px;padding:13px 28px;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer">Refazer quiz</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ quizActive }}" hint-placeholder-val="{{ true }}">
+      <div style="background:rgba(255,255,255,.06);border-radius:4px;padding:22px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:500 11px 'IBM Plex Mono',monospace;color:var(--inv-muted)">{{ qProgress }}</span>
+        <b style="font:600 16px/1.4 'IBM Plex Sans',sans-serif">{{ qText }}</b>
+        <sc-for list="{{ qOptions }}" as="o" hint-placeholder-count="3">
+          <button onClick="{{ o.pick }}" style="{{ o.style }}">{{ o.label }}</button>
+        </sc-for>
+        <sc-if value="{{ qAnswered }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px;animation:fadeUp .25s ease">
+            <p style="margin:0;font:400 13px/1.6 'IBM Plex Sans',sans-serif;color:var(--inv-muted)">{{ qFeedback }}</p>
+            <button onClick="{{ nextQ }}" style="align-self:flex-start;background:#fff;color:#17161a;border:none;border-radius:2px;padding:12px 26px;font:600 13.5px 'IBM Plex Sans',sans-serif;cursor:pointer">{{ nextLabel }}</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </section>
+
+  <section id="lacunas" data-screen-label="Lacunas" style="padding:44px 24px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Agenda de pesquisa</span>
+    <h2 style="margin:0;font:700 26px/1.15 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">O que ainda falta pesquisar?</h2>
+    <details style="border-bottom:1px solid var(--line)"><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Estudos longitudinais</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Como a identidade coletiva evolui ao longo do tempo, diante da alta rotatividade da categoria.</p></details>
+    <details style="border-bottom:1px solid var(--line)"><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Recortes de gênero e raça</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Grupos formados por mulheres aparecem nos estudos, mas ainda há pouca análise específica desses recortes.</p></details>
+    <details style="border-bottom:1px solid var(--line)"><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">O papel do algoritmo na identidade</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Como o gerenciamento algorítmico modula, ao mesmo tempo, isolamento e novas formas de conexão.</p></details>
+    <details><summary style="padding:14px 0;display:flex;align-items:center;gap:10px"><b style="font:600 14.5px 'IBM Plex Sans',sans-serif">Comparações entre cidades e países</b><span style="margin-left:auto;color:var(--red);font-size:18px">+</span></summary><p style="margin:0;padding:0 0 14px;font:400 13.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--muted)">Contextos regulatórios diferentes podem produzir processos identitários distintos.</p></details>
+  </section>
+
+  <section data-screen-label="Conclusão" style="padding:44px 24px;display:flex;flex-direction:column;gap:14px;border-bottom:1px solid var(--line)">
+    <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)">Conclusão</span>
+    <p style="margin:0;font:500 19px/1.55 'IBM Plex Sans',sans-serif;letter-spacing:-.01em;text-wrap:pretty">"A revisão mostra que a identidade social entre trabalhadores de aplicativos é construída por diferentes processos de interação, pertencimento e reconhecimento coletivo. Compreender esses mecanismos contribui para ampliar o conhecimento científico sobre novas formas de organização do trabalho."</p>
+    <button onClick="{{ openSticker }}" style="align-self:flex-start;background:var(--red);color:#fff;border:none;border-radius:2px;padding:14px 28px;font:600 14px 'IBM Plex Sans',sans-serif;cursor:pointer">Imprimir adesivo de divulgação</button>
+  </section>
+
+  <section id="refs" data-screen-label="Referências" style="padding:44px 24px 36px;display:flex;flex-direction:column;gap:10px">
+    <h2 style="margin:0;font:700 20px/1.2 'IBM Plex Sans',sans-serif;letter-spacing:-.02em">Estudos sintetizados</h2>
+    <p style="margin:0 0 4px;font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:var(--muted)">Artigos incluídos na revisão integrativa (autoria e ano conforme publicação original):</p>
+    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[1]</b> Os entregadores de aplicativos e a fragmentação da classe trabalhadora na contemporaneidade.</p>
+    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[2]</b> Enquadramentos em disputa sob um aparente consenso neoliberal: o caso da regulamentação do trabalho de entregas por aplicativo no Brasil (2025).</p>
+    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[3]</b> "Parceiros" assimétricos: trabalho e saúde de motoristas por aplicativos no Rio de Janeiro, Brasil (2021).</p>
+    <p style="margin:0;font:400 12.5px/1.7 'IBM Plex Sans',sans-serif;color:var(--muted)"><b style="color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px">[4]</b> Laços que criam nós: como trabalhadores de aplicativos coconstroem suas identidades em contextos precários de trabalho.</p>
+  </section>
+</main>
+
+<footer style="background:var(--inv-bg);color:var(--inv-muted);padding:28px 24px;display:flex;flex-direction:column;gap:8px">
+  <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;background:var(--red);border-radius:50%"></span><span style="font:700 14px 'IBM Plex Sans',sans-serif;color:var(--inv-ink)">Tamo Junto<span style="color:var(--red)">.</span></span></div>
+  <span style="font:400 11.5px/1.6 'IBM Plex Sans',sans-serif">Produto técnico de divulgação científica derivado de revisão integrativa da literatura · 2026</span>
+</footer>
+
+<sc-if value="{{ stickerOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:100;background:rgba(13,12,15,.7);display:flex;align-items:flex-end;justify-content:center" onClick="{{ closeSticker }}">
+    <div style="background:var(--bg);border-radius:14px 14px 0 0;padding:24px 24px 32px;width:100%;max-width:480px;display:flex;flex-direction:column;gap:16px;animation:fadeUp .25s ease" onClick="{{ stopProp }}">
+      <div style="display:flex;align-items:center;justify-content:space-between"><b style="font:700 17px 'IBM Plex Sans',sans-serif">Adesivo de divulgação</b><button onClick="{{ closeSticker }}" aria-label="Fechar" style="background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;min-width:44px;min-height:44px">×</button></div>
+      <div style="align-self:center;border:2.5px dashed var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;background:#fff;color:#17161a;max-width:240px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;background:#c22128;border-radius:50%"></span><span style="font:700 16px 'IBM Plex Sans',sans-serif">Tamo Junto<span style="color:#c22128">.</span></span></div>
+        <sc-if value="{{ qrReady }}" hint-placeholder-val="{{ false }}"><img class="qr-print" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="QR Code" style="width:130px;height:130px"></sc-if>
+        <sc-if value="{{ qrLoading }}" hint-placeholder-val="{{ true }}"><div style="width:130px;height:130px;background:repeating-linear-gradient(45deg,#f0eeeb,#f0eeeb 8px,#e6e3df 8px,#e6e3df 16px);display:flex;align-items:center;justify-content:center;font:500 10px 'IBM Plex Mono',monospace;color:#8a878d">gerando QR…</div></sc-if>
+        <p style="margin:0;font:500 10px/1.45 'IBM Plex Sans',sans-serif;text-align:center">Aponte a câmera e conheça o que a ciência revela sobre identidade social entre trabalhadores de aplicativos.</p>
+      </div>
+      <p style="margin:0;font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:var(--muted);text-align:center">A impressão gera uma folha com 4 adesivos recortáveis apontando para este site.</p>
+      <button onClick="{{ printSticker }}" style="background:var(--red);color:#fff;border:none;border-radius:2px;padding:15px;font:600 15px 'IBM Plex Sans',sans-serif;cursor:pointer">Imprimir folha de adesivos</button>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sistema&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;sistema&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Aparência&quot;},&quot;studyUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://tamojunto.com.br&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Divulgação&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, stickerOpen: false, qrData: null, selNode: 1, showNeg: false,
+    qIndex: 0, qPicked: null, qScore: 0, quizDone: false };
+
+  questions = [
+    { q: 'Para Tajfel, a identidade social nasce principalmente de…', opts: ['Traços individuais de personalidade', 'Pertencimento a grupos sociais', 'Nível de renda'], correct: 1, fb: 'Correto: parte de quem somos vem dos grupos aos quais sentimos pertencer.' },
+    { q: '"Categorização social" significa…', opts: ['Organizar o mundo social em grupos', 'Classificar pessoas por desempenho', 'Criar hierarquias nas empresas'], correct: 0, fb: 'Isso: categorizar simplifica o mundo social e define fronteiras entre grupos.' },
+    { q: 'Segundo os estudos, grupos de WhatsApp entre trabalhadores funcionam como…', opts: ['Apenas canais de reclamação', 'Espaços de troca, apoio e reconhecimento mútuo', 'Ferramentas criadas pelas plataformas'], correct: 1, fb: 'Exato: a literatura descreve esses grupos como redes de sociabilidade e aprendizado mútuo.' },
+    { q: 'O que a literatura aponta como fator que DIFICULTA a formação de coletivos?', opts: ['Objetivos comuns', 'Solidariedade entre pares', 'Individualização e gerenciamento algorítmico'], correct: 2, fb: 'Correto: isolamento, competição, rotatividade e algoritmos aparecem como dificultadores.' },
+    { q: '"Pertencimento despersonalizado", identificado em um dos estudos, refere-se a…', opts: ['Sentir-se parte da categoria mesmo sem um grupo específico', 'Perder a identidade individual', 'Não pertencer a grupo algum'], correct: 0, fb: 'Isso: um senso de pertencimento focado no indivíduo, independente de um grupo formado.' }
+  ];
+
+  nodes = [
+    { t: 'Categorização social', x: 'Organizar o mundo social em grupos ("entregadores", "passageiros", "a plataforma") é o primeiro passo do processo identitário descrito por Tajfel.' },
+    { t: 'Identidade social', x: 'A parte do autoconceito que deriva do pertencimento a grupos, junto com o valor emocional atribuído a esse pertencimento.' },
+    { t: 'Pertencimento', x: 'O sentimento de fazer parte. Nos estudos, aparece em nível grupal (a "tribo") e individual (ser visto e reconhecido).' },
+    { t: 'Comparação entre grupos', x: 'Comparar "nós" e "eles". Uma avaliação positiva do próprio grupo alimenta a autoestima coletiva.' },
+    { t: 'Autoestima coletiva', x: 'O valor que o grupo confere a si mesmo — fortalecido por símbolos, conquistas e reconhecimento entre pares.' },
+    { t: 'Normas do grupo', x: 'Expectativas de comportamento compartilhadas: rodízios em horários perigosos, estratégias comuns, códigos próprios.' }
+  ];
+
+  componentDidMount() {
+    const theme = this.props.theme ?? 'sistema';
+    if (theme !== 'sistema') document.documentElement.dataset.theme = theme;
+    else delete document.documentElement.dataset.theme;
+    this.makeQR();
+  }
+
+  makeQR() {
+    const tryGen = () => {
+      if (!window.QRCode) { setTimeout(tryGen, 300); return; }
+      const holder = document.createElement('div');
+      holder.style.cssText = 'position:absolute;left:-9999px;top:0';
+      document.body.appendChild(holder);
+      new window.QRCode(holder, { text: this.props.studyUrl ?? window.location.href, width: 512, height: 512, correctLevel: window.QRCode.CorrectLevel.M });
+      const grab = (tries) => {
+        const img = holder.querySelector('img');
+        const canvas = holder.querySelector('canvas');
+        const src = (img && img.src) || (canvas && canvas.toDataURL('image/png'));
+        if (src) { this.setState({ qrData: src }); document.querySelectorAll('img.qr-print').forEach(el => { el.src = src; }); holder.remove(); }
+        else if (tries < 20) setTimeout(() => grab(tries + 1), 150);
+        else holder.remove();
+      };
+      grab(0);
+    };
+    tryGen();
+  }
+
+  renderVals() {
+    const s = this.state;
+    const Q = this.questions[s.qIndex];
+    const answered = s.qPicked !== null;
+    const qOptions = Q.opts.map((label, i) => {
+      let border = '1.5px solid rgba(255,255,255,.25)', bg = 'transparent', color = 'var(--inv-ink)';
+      if (answered && i === Q.correct) { border = '1.5px solid #4cc98e'; bg = 'rgba(76,201,142,.14)'; color = '#a8e8c9'; }
+      else if (answered && i === s.qPicked) { border = '1.5px solid var(--red)'; bg = 'rgba(224,69,75,.14)'; color = '#f2a3a6'; }
+      return { label, pick: () => { if (!answered) this.setState({ qPicked: i, qScore: s.qScore + (i === Q.correct ? 1 : 0) }); },
+        style: `text-align:left;font:500 13.5px 'IBM Plex Sans',sans-serif;padding:13px 16px;border-radius:4px;cursor:pointer;min-height:44px;border:${border};background:${bg};color:${color}` };
+    });
+    const tabBase = "font:600 13px 'IBM Plex Sans',sans-serif;padding:11px 20px;border-radius:2px;cursor:pointer;min-height:44px;border:1.5px solid var(--ink);";
+    const pos = [
+      { label: 'Experiências compartilhadas', desc: 'Vivências comuns criam a base do reconhecimento.', color: 'var(--red)', sign: '+' },
+      { label: 'Comunicação', desc: 'Grupos de mensagem e encontros sustentam o vínculo.', color: 'var(--red)', sign: '+' },
+      { label: 'Reconhecimento entre pares', desc: '"Ele passa pelo que eu passo."', color: 'var(--red)', sign: '+' },
+      { label: 'Objetivos comuns', desc: 'Propósitos compartilhados organizam subgrupos.', color: 'var(--red)', sign: '+' },
+      { label: 'Solidariedade', desc: 'Apoio mútuo em segurança, saúde e renda.', color: 'var(--red)', sign: '+' }
+    ];
+    const neg = [
+      { label: 'Isolamento', desc: 'Trabalho disperso, sem locais de encontro formais.', color: 'var(--muted)', sign: '−' },
+      { label: 'Competição', desc: 'Disputa por corridas incentivada pelo modelo.', color: 'var(--muted)', sign: '−' },
+      { label: 'Alta rotatividade', desc: 'Identidade profissional provisória, "trabalho amador".', color: 'var(--muted)', sign: '−' },
+      { label: 'Individualização', desc: 'A narrativa do "patrão de si" desloca o foco do coletivo.', color: 'var(--muted)', sign: '−' },
+      { label: 'Algoritmos', desc: 'Gerenciamento algorítmico fragmenta rotinas e vínculos.', color: 'var(--muted)', sign: '−' }
+    ];
+    const node = this.nodes[s.selNode];
+    return {
+      menuOpen: s.menuOpen,
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      stickerOpen: s.stickerOpen,
+      openSticker: () => this.setState({ stickerOpen: true, menuOpen: false }, () => { const d = this.state.qrData; if (d) setTimeout(() => document.querySelectorAll('img.qr-print').forEach(el => { el.src = d; }), 50); }),
+      closeSticker: () => this.setState({ stickerOpen: false }),
+      stopProp: (e) => e.stopPropagation(),
+      printSticker: () => { this.setState({ stickerOpen: false }, () => setTimeout(() => window.print(), 150)); },
+      qrData: s.qrData || 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==', qrReady: !!s.qrData, qrLoading: !s.qrData,
+      stickerCopies: [1, 2, 3, 4],
+      mapNodes: this.nodes.map((n, i) => ({
+        label: n.t, pick: () => this.setState({ selNode: i }),
+        style: `font:600 12.5px 'IBM Plex Sans',sans-serif;padding:10px 16px;border-radius:20px;cursor:pointer;min-height:44px;border:1.5px solid ${i === s.selNode ? 'var(--red)' : 'var(--line)'};background:${i === s.selNode ? 'var(--red)' : 'var(--surface)'};color:${i === s.selNode ? '#fff' : 'var(--ink)'}`
+      })),
+      nodeTitle: node.t, nodeText: node.x,
+      showPos: () => this.setState({ showNeg: false }),
+      showNeg: () => this.setState({ showNeg: true }),
+      posTabStyle: tabBase + (s.showNeg ? 'background:transparent;color:var(--ink)' : 'background:var(--ink);color:var(--bg)'),
+      negTabStyle: tabBase + (s.showNeg ? 'background:var(--ink);color:var(--bg)' : 'background:transparent;color:var(--ink)'),
+      factors: s.showNeg ? neg : pos,
+      quizActive: !s.quizDone, quizDone: s.quizDone,
+      qProgress: `Pergunta ${s.qIndex + 1} de ${this.questions.length}`,
+      qText: Q.q, qOptions, qAnswered: answered,
+      qFeedback: answered ? (s.qPicked === Q.correct ? Q.fb : 'Não exatamente. ' + Q.fb.replace(/^(Correto|Isso|Exato):?\s*/i, 'A literatura indica: ')) : '',
+      nextLabel: s.qIndex + 1 < this.questions.length ? 'Próxima →' : 'Ver resultado',
+      nextQ: () => {
+        if (s.qIndex + 1 < this.questions.length) this.setState({ qIndex: s.qIndex + 1, qPicked: null });
+        else this.setState({ quizDone: true });
+      },
+      restartQuiz: () => this.setState({ qIndex: 0, qPicked: null, qScore: 0, quizDone: false }),
+      scoreText: `${s.qScore}/${this.questions.length}`,
+      scoreMsg: s.qScore >= 4 ? 'Excelente! Você compreendeu os principais conceitos da Teoria da Identidade Social.' : s.qScore >= 2 ? 'Bom caminho! Revisite as seções sobre a teoria e os achados para consolidar os conceitos.' : 'Que tal reler as seções? A teoria de Tajfel fica mais clara na segunda passada.'
+    };
+  }
+}
+</script>
+</body>
+</html>
