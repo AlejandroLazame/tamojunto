@@ -277,9 +277,9 @@
                 <div style="font-family:'Anton',sans-serif;font-size:36px;line-height:.9;color:#fff;letter-spacing:.5px">TAMO<br>JUNTO</div>
                 <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;line-height:1.15;color:#ffd9d6;text-transform:uppercase;margin-top:7px;max-width:150px">{{ stickerTagline }}</div>
               </div>
-              <div style="flex:none;background:#fff;padding:7px;border-radius:8px">
-                <div ref="{{ qrRef }}" style="width:78px;height:78px"></div>
-                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:8px;letter-spacing:1px;text-align:center;color:#999;text-transform:uppercase;margin-top:3px">tamojunto-me.com</div>
+              <div style="flex:none;background:#fff;padding:7px;border-radius:8px;display:flex;flex-direction:column;align-items:center">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=78x78&amp;data=https://tamojunto-delta.vercel.app/" alt="QR Code" style="width:78px;height:78px;display:block;margin:0 auto">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:8px;letter-spacing:1px;text-align:center;color:#999;text-transform:uppercase;margin-top:3px">tamojunto-delta.vercel.app</div>
               </div>
             </div>
           </div>
@@ -317,7 +317,7 @@
       <a href="#" style="color:#ddd">Termos de uso</a>
       <a href="#" style="color:#ddd">Privacidade</a>
     </div>
-    <div style="border-top:1px solid #222;padding-top:14px;font-size:11.5px;color:#666;line-height:1.5">© {{ year }} Tamo Junto · tamojunto-me.com · As informações são de caráter orientativo. Verifique sempre os canais oficiais de cada entidade.</div>
+    <div style="border-top:1px solid #222;padding-top:14px;font-size:11.5px;color:#666;line-height:1.5">© {{ year }} Tamo Junto · tamojunto-delta.vercel.app · As informações são de caráter orientativo. Verifique sempre os canais oficiais de cada entidade.</div>
   </footer>
 
 </div>
@@ -509,7 +509,7 @@ class Component extends DCLogic {
       showBox: model==='entregador'||model==='ambos',
       showWheel: model==='motorista'||model==='ambos',
       stickerStyle:`background:#E10600;background:${bgMap[model]};border-radius:10px;padding:18px 18px 16px;min-height:150px;display:flex;flex-direction:column`,
-      qrRef:(el)=>{ this._qrEl=el; },
+
       doPrint:()=>{ try{ window.print() }catch(e){} },
       printSteps:[
         {n:'1',t:'Escolha o modelo que combina com seu trampo.'},
@@ -565,32 +565,7 @@ class Component extends DCLogic {
     this._tlRaf=requestAnimationFrame(step);
   }
 
-  componentDidUpdate(){ this.paintQR(); }
-  componentDidMount(){ this.paintQR(); }
-  paintQR(){
-    if(!this._qrEl) return;
-    const seedMap = { entregador:7, motorista:13, ambos:21 };
-    const seed = seedMap[this.state.model]||7;
-    const el = this._qrEl;
-    el.innerHTML='';
-    const N=21, size=78, gap=size/N;
-    const s0=seed*997+3;
-    let s=s0;
-    const rnd=()=>{ s=(s*1103515245+12345)&0x7fffffff; return (s>>15)&1; };
-    const finderVal=(r,c)=>{
-      const test=(or_,oc)=>{ const dr=r-or_,dc=c-oc; if(dr<0||dr>6||dc<0||dc>6)return null; const ring=Math.max(Math.abs(dr-3),Math.abs(dc-3)); return (ring<=1||ring===3)?1:0; };
-      let v=test(0,0); if(v!==null&&r<7&&c<7)return v;
-      v=test(0,N-7); if(v!==null&&r<7&&c>=N-7)return v;
-      v=test(N-7,0); if(v!==null&&r>=N-7&&c<7)return v;
-      return null;
-    };
-    const frag=document.createDocumentFragment();
-    for(let r=0;r<N;r++)for(let c=0;c<N;c++){
-      const f=finderVal(r,c); const on = f!==null?f:rnd();
-      if(on){ const d=document.createElement('div'); d.style.cssText=`position:absolute;left:${c*gap}px;top:${r*gap}px;width:${gap+0.6}px;height:${gap+0.6}px;background:#0a0a0a`; frag.appendChild(d); }
-    }
-    el.style.position='relative'; el.appendChild(frag);
-  }
+
 }
 </script>
 </body>
